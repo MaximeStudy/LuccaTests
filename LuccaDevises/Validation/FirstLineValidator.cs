@@ -11,7 +11,12 @@
 
         public bool IsValid()
         {
-            return false;
+            var splitLine = line.Split(';');
+            if (splitLine.Length != 3)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

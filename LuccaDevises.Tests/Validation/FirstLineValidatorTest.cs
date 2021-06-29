@@ -17,5 +17,31 @@ namespace LuccaDevises.Tests.Validation
             //Then
             Assert.False(contentIsValid);
         }
+
+        [Fact]
+        public void GivenAFirstLineWithThreeElement_ThenTheLineShouldHaveThreeArgumentSeparatedBySemicolon()
+        {
+            //Given
+            IValidator firstLineValidator = new FirstLineValidator("EUR;550;JPY");
+
+            //When
+            var contentIsValid = firstLineValidator.IsValid();
+
+            //Then
+            Assert.True(contentIsValid);
+        }
+
+        [Fact]
+        public void GivenAFirstLineWithoutThreeElement_ThenLineIsNotValid()
+        {
+            //Given
+            IValidator firstLineValidator = new FirstLineValidator("EUR;550;JPY;4");
+
+            //When
+            var contentIsValid = firstLineValidator.IsValid();
+
+            //Then
+            Assert.False(contentIsValid);
+        }
     }
 }
