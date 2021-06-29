@@ -1,17 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LuccaDevises.Validation
 {
-    public class ContentValidator : IValidator
+    public class ContentValidator
     {
-        private readonly List<string> fileContent;
+        public FirstLineValidator FirstLineValidator { get; private set; }
 
-        public ContentValidator(List<string> fileContent)
+        public SecondLineValidator SecondLineValidator { get; private set; }
+
+        public List<NthLineValidator> NthLineValidators { get; private set; }
+
+        public ContentValidator()
         {
-            this.fileContent = fileContent;
         }
 
-        public bool IsValid()
+        public static ContentValidator Parse(List<string> fileContent)
+        {
+            if (IsValid(fileContent))
+            {
+                var content = new ContentValidator();
+                content.FirstLineValidator = new FirstLineValidator(fileContent[0]);
+                content.SecondLineValidator = new SecondLineValidator(fileContent[1]);
+                content.NthLineValidators = new List<NthLineValidator>();
+                for (int i = 2; i < fileContent.Count; i++)
+                {
+                    content.NthLineValidators.Add(new NthLineValidator(fileContent[i]));
+                }
+                return content;
+            }
+            throw new Exception("File content not valid!");
+        }
+
+        public static bool IsValid(List<string> fileContent)
         {
             if (fileContent.Count <= 2)
             {

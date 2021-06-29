@@ -23,14 +23,6 @@ namespace LuccaDevises
                 var inputFile = File.ReadAllText(filePath)
                                     .Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
                                     .ToList();
-
-                ContentValidator contentValidator = new ContentValidator(inputFile);
-                if (contentValidator.IsValid())
-                {
-                }
-                else
-                {
-                }
             }
             else
             {
