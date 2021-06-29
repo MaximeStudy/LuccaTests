@@ -18,8 +18,10 @@ namespace LuccaDevises.Validation
             {
                 return false;
             }
-            var initialDevise = fileContent[0];
-            return true;
+            var firstLineValidator = new FirstLineValidator(fileContent[0]);
+            var secondLineValidator = new SecondLineValidator(fileContent[1]);
+
+            return firstLineValidator.IsValid() && secondLineValidator.IsValid();
         }
     }
 }

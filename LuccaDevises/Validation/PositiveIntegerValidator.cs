@@ -2,11 +2,11 @@
 
 namespace LuccaDevises.Validation
 {
-    public class AmountValidator : IValidator
+    public class PositiveIntegerValidator : IValidator
     {
         private readonly string amount;
 
-        public AmountValidator(string amount)
+        public PositiveIntegerValidator(string amount)
         {
             this.amount = amount;
         }

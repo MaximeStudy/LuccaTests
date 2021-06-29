@@ -18,7 +18,7 @@
             }
 
             var currencyOne = new CurrencyValidator(splitLine[0]);
-            var amount = new AmountValidator(splitLine[1]);
+            var amount = new PositiveIntegerValidator(splitLine[1]);
             var currencyTwo = new CurrencyValidator(splitLine[2]);
 
             return currencyOne.IsValid() && amount.IsValid() && currencyTwo.IsValid();
