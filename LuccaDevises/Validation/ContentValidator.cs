@@ -1,6 +1,4 @@
-﻿using LuccaDevises.Validation;
-using System.Collections.Generic;
-using System.Numerics;
+﻿using System.Collections.Generic;
 
 namespace LuccaDevises.Validation
 {
@@ -28,8 +26,20 @@ namespace LuccaDevises.Validation
                 {
                     return false;
                 }
+                for (int i = 2; i < fileContent.Count; i++)
+                {
+                    var nthLineValidator = new NthLineValidator(fileContent[i]);
+                    if (!nthLineValidator.IsValid())
+                    {
+                        return false;
+                    }
+                }
             }
-            return firstLineValidator.IsValid() && secondLineValidator.IsValid();
+            else
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

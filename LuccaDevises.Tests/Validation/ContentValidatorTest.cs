@@ -75,5 +75,26 @@ namespace LuccaDevises.Tests.Validation
             //Then
             Assert.False(contentIsValid);
         }
+
+        [Fact]
+        public void GivenAFileContentWithErrorInANthElement_ThenContentIsNotValid()
+        {
+            //Given
+            List<string> fileContent = new List<string>();
+            fileContent.Add("EUR;550;JPY");
+            fileContent.Add("4");
+            fileContent.Add("AUD;CHF;0.9661");
+            fileContent.Add("AUD;CFG;0.9661");
+            fileContent.Add("AUD;CHF;0.9661");
+            fileContent.Add("AUD;CHF;0.9");
+
+            var contentValidator = new ContentValidator(fileContent);
+
+            //When
+            var contentIsValid = contentValidator.IsValid();
+
+            //Then
+            Assert.False(contentIsValid);
+        }
     }
 }
