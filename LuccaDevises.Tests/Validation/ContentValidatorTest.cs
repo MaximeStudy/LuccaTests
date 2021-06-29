@@ -11,7 +11,7 @@ namespace LuccaDevises.Tests.Validation
         {
             //Given
             List<string> fileContent = new List<string>();
-            ContentValidator contentValidator = new ContentValidator(fileContent);
+            var contentValidator = new ContentValidator(fileContent);
 
             //When
             var contentIsValid = contentValidator.IsValid();
@@ -26,16 +26,54 @@ namespace LuccaDevises.Tests.Validation
             //Given
             List<string> fileContent = new List<string>();
             fileContent.Add("EUR;550;JPY");
-            fileContent.Add("6");
+            fileContent.Add("1");
             fileContent.Add("AUD;CHF;0.9661");
 
-            ContentValidator contentValidator = new ContentValidator(fileContent);
+            var contentValidator = new ContentValidator(fileContent);
 
             //When
             var contentIsValid = contentValidator.IsValid();
 
             //Then
             Assert.True(contentIsValid);
+        }
+
+        [Fact]
+        public void GivenAFileContent_ThenTheNumberOfExchangeRateAreTheSameAsTheSecondLine()
+        {
+            //Given
+            List<string> fileContent = new List<string>();
+            fileContent.Add("EUR;550;JPY");
+            fileContent.Add("2");
+            fileContent.Add("AUD;CHF;0.9661");
+            fileContent.Add("JPY;CHF;0.9661");
+
+            var contentValidator = new ContentValidator(fileContent);
+
+            //When
+            var contentIsValid = contentValidator.IsValid();
+
+            //Then
+            Assert.True(contentIsValid);
+        }
+
+        [Fact]
+        public void GivenAFileContentWithoutFittingExchangeRateWithNumber_ThenContentIsNotValid()
+        {
+            //Given
+            List<string> fileContent = new List<string>();
+            fileContent.Add("EUR;550;JPY");
+            fileContent.Add("4");
+            fileContent.Add("AUD;CHF;0.9661");
+            fileContent.Add("AUD;CFG;0.9661");
+
+            var contentValidator = new ContentValidator(fileContent);
+
+            //When
+            var contentIsValid = contentValidator.IsValid();
+
+            //Then
+            Assert.False(contentIsValid);
         }
     }
 }

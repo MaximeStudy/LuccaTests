@@ -1,5 +1,6 @@
 ﻿using LuccaDevises.Validation;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace LuccaDevises.Validation
 {
@@ -20,7 +21,14 @@ namespace LuccaDevises.Validation
             }
             var firstLineValidator = new FirstLineValidator(fileContent[0]);
             var secondLineValidator = new SecondLineValidator(fileContent[1]);
-
+            if (firstLineValidator.IsValid() && secondLineValidator.IsValid())
+            {
+                var numberOfExchangeRate = int.Parse(fileContent[1]);
+                if (fileContent.Count != numberOfExchangeRate + 2)
+                {
+                    return false;
+                }
+            }
             return firstLineValidator.IsValid() && secondLineValidator.IsValid();
         }
     }

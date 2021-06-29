@@ -13,7 +13,7 @@ namespace LuccaDevises.Validation
 
         public bool IsValid()
         {
-            if (BigInteger.TryParse(amount, out BigInteger result))
+            if (int.TryParse(amount, out int result))
             {
                 if (result > 0)
                 {
