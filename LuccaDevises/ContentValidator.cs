@@ -13,9 +13,11 @@ namespace LuccaDevises
 
         public bool IsValid()
         {
-            if (true)
+            if (fileContent.Count <= 2)
             {
+                return false;
             }
+            var initialDevise = fileContent[0];
             return true;
         }
     }
