@@ -43,5 +43,18 @@ namespace LuccaDevises.Tests.Validation
             //Then
             Assert.False(contentIsValid);
         }
+
+        [Fact]
+        public void GivenAFirstLineWithThreeElementUnordered_ThenLineIsNotValid()
+        {
+            //Given
+            IValidator firstLineValidator = new FirstLineValidator("550;EUR;JPY");
+
+            //When
+            var contentIsValid = firstLineValidator.IsValid();
+
+            //Then
+            Assert.False(contentIsValid);
+        }
     }
 }
