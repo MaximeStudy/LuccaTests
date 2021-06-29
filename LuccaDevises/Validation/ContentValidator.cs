@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using LuccaDevises.Validation;
+using System.Collections.Generic;
 
-namespace LuccaDevises
+namespace LuccaDevises.Validation
 {
-    public class ContentValidator
+    public class ContentValidator : IValidator
     {
         private readonly List<string> fileContent;
 

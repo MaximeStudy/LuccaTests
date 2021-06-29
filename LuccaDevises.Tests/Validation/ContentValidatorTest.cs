@@ -1,7 +1,8 @@
+using LuccaDevises.Validation;
 using System.Collections.Generic;
 using Xunit;
 
-namespace LuccaDevises.Tests
+namespace LuccaDevises.Tests.Validation
 {
     public class ContentValidatorTest
     {
