@@ -1,4 +1,4 @@
-﻿using LuccaDevises.Services;
+﻿using LuccaDevises.Services.Extensions;
 using LuccaDevises.Services.Parser;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -10,7 +10,7 @@ namespace LuccaDevises
     internal class Program
     {
         private static readonly ServiceProvider serviceProvider = new ServiceCollection()
-                                                                    .AddParserServices()
+                                                                    .AddLuccaDevicesServices()
                                                                     .BuildServiceProvider();
 
         private static void Main(string[] args)

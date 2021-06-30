@@ -1,11 +1,11 @@
 ﻿using LuccaDevises.Services.Parser;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LuccaDevises.Services
+namespace LuccaDevises.Services.Extensions
 {
     public static class IServiceCollectionExtensions
     {
-        public static IServiceCollection AddParserServices(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddLuccaDevicesServices(this IServiceCollection serviceCollection)
         {
             return serviceCollection.AddSingleton<CurrencyParser, CurrencyParser>()
                                     .AddSingleton<PositiveIntegerParser, PositiveIntegerParser>()
