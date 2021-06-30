@@ -1,18 +1,18 @@
-﻿using LuccaDevises.Validation;
+﻿using LuccaDevises.Parser;
 using Xunit;
 
-namespace LuccaDevises.Tests.Validation
+namespace LuccaDevises.Tests.Parser
 {
-    public class ExchangeRateValidatorTest
+    public class ExchangeRateParserTest
     {
         [Fact]
         public void GivenExchangeRate_ThenSeparatorIsPoint()
         {
             //Given
-            IValidator exchangeRateValidator = new ExchangeRateValidator("86.0202");
+            var exchangeRateParser = new ExchangeRateParser();
 
             //When
-            var contentIsValid = exchangeRateValidator.IsValid();
+            var contentIsValid = exchangeRateParser.IsValid("86.0202");
 
             //Then
             Assert.True(contentIsValid);
@@ -22,10 +22,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenExchangeRate_ThenCurrencySymbolAreNotAccepted()
         {
             //Given
-            IValidator exchangeRateValidator = new ExchangeRateValidator("86.0202$");
+            var exchangeRateParser = new ExchangeRateParser();
 
             //When
-            var contentIsValid = exchangeRateValidator.IsValid();
+            var contentIsValid = exchangeRateParser.IsValid("86.0202$");
 
             //Then
             Assert.False(contentIsValid);
@@ -35,10 +35,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenExchangeRatePrecisionIsFourDecimals_ThenIsValid()
         {
             //Given
-            IValidator exchangeRateValidator = new ExchangeRateValidator("86.0202");
+            var exchangeRateParser = new ExchangeRateParser();
 
             //When
-            var contentIsValid = exchangeRateValidator.IsValid();
+            var contentIsValid = exchangeRateParser.IsValid("86.0202");
 
             //Then
             Assert.True(contentIsValid);
@@ -48,10 +48,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenExchangeRatePrecisionWithoutFourDecimals_ThenIsNotValid()
         {
             //Given
-            IValidator exchangeRateValidator = new ExchangeRateValidator("86.022");
+            var exchangeRateParser = new ExchangeRateParser();
 
             //When
-            var contentIsValid = exchangeRateValidator.IsValid();
+            var contentIsValid = exchangeRateParser.IsValid("86.022");
 
             //Then
             Assert.False(contentIsValid);
@@ -61,10 +61,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenExchangeRateWithoutPrecision_ThenIsNotValid()
         {
             //Given
-            IValidator exchangeRateValidator = new ExchangeRateValidator("86");
+            var exchangeRateParser = new ExchangeRateParser();
 
             //When
-            var contentIsValid = exchangeRateValidator.IsValid();
+            var contentIsValid = exchangeRateParser.IsValid("86");
 
             //Then
             Assert.False(contentIsValid);

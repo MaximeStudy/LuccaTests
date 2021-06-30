@@ -1,18 +1,18 @@
-﻿using LuccaDevises.Validation;
+﻿using LuccaDevises.Parser;
 using Xunit;
 
-namespace LuccaDevises.Tests.Validation
+namespace LuccaDevises.Tests.Parser
 {
-    public class CurrencyValidatorTest
+    public class CurrencyParserTest
     {
         [Fact]
         public void GivenACurrencyWith3Letter_ThenIsValid()
         {
             //Given
-            IValidator firstLineValidator = new CurrencyValidator("EUR");
+            var currencyParser = new CurrencyParser();
 
             //When
-            var contentIsValid = firstLineValidator.IsValid();
+            var contentIsValid = currencyParser.IsValid("EUR");
 
             //Then
             Assert.True(contentIsValid);
@@ -22,10 +22,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenACurrencyWithout3Letter_ThenIsNotValid()
         {
             //Given
-            IValidator firstLineValidator = new CurrencyValidator("EU3aR");
+            var currencyParser = new CurrencyParser();
 
             //When
-            var contentIsValid = firstLineValidator.IsValid();
+            var contentIsValid = currencyParser.IsValid("EU3aR");
 
             //Then
             Assert.False(contentIsValid);

@@ -1,18 +1,18 @@
-﻿using LuccaDevises.Validation;
+﻿using LuccaDevises.Parser;
 using Xunit;
 
-namespace LuccaDevises.Tests.Validation
+namespace LuccaDevises.Tests.Parser
 {
-    public class PositiveIntegerValidatorTest
+    public class PositiveIntegerParserTest
     {
         [Fact]
         public void GivenAnAmountGreaterThanZero_ThenAmountIsValid()
         {
             //Given
-            IValidator amountValidator = new PositiveIntegerValidator("154");
+            var positiveIntegerParser = new PositiveIntegerParser();
 
             //When
-            var contentIsValid = amountValidator.IsValid();
+            var contentIsValid = positiveIntegerParser.IsValid("154");
 
             //Then
             Assert.True(contentIsValid);
@@ -22,10 +22,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenAnAmountLowerThanZero_ThenAmountIsNotValid()
         {
             //Given
-            IValidator amountValidator = new PositiveIntegerValidator("-5");
+            var positiveIntegerParser = new PositiveIntegerParser();
 
             //When
-            var contentIsValid = amountValidator.IsValid();
+            var contentIsValid = positiveIntegerParser.IsValid("-5");
 
             //Then
             Assert.False(contentIsValid);
@@ -35,10 +35,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenAnAmounEqualToZero_ThenAmountIsNotValid()
         {
             //Given
-            IValidator amountValidator = new PositiveIntegerValidator("0");
+            var positiveIntegerParser = new PositiveIntegerParser();
 
             //When
-            var contentIsValid = amountValidator.IsValid();
+            var contentIsValid = positiveIntegerParser.IsValid("0");
 
             //Then
             Assert.False(contentIsValid);
@@ -48,10 +48,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenAnAmountThatIsNotAnInteger_ThenAmountIsNotValid()
         {
             //Given
-            IValidator amountValidator = new PositiveIntegerValidator("5.5");
+            var positiveIntegerParser = new PositiveIntegerParser();
 
             //When
-            var contentIsValid = amountValidator.IsValid();
+            var contentIsValid = positiveIntegerParser.IsValid("5.5");
 
             //Then
             Assert.False(contentIsValid);

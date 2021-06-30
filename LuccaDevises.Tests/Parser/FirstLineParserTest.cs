@@ -1,18 +1,18 @@
-﻿using LuccaDevises.Validation;
+﻿using LuccaDevises.Parser;
 using Xunit;
 
-namespace LuccaDevises.Tests.Validation
+namespace LuccaDevises.Tests.Parser
 {
-    public class FirstLineValidatorTest
+    public class FirstLineParserTest
     {
         [Fact]
         public void GivenAnEmptyFirstLine_ThenLineIsNotValid()
         {
             //Given
-            IValidator firstLineValidator = new FirstLineValidator("");
+            var firstLineParser = new FirstLineParser();
 
             //When
-            var contentIsValid = firstLineValidator.IsValid();
+            var contentIsValid = firstLineParser.IsValid("");
 
             //Then
             Assert.False(contentIsValid);
@@ -22,10 +22,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenAFirstLineWithThreeElement_ThenTheLineShouldHaveThreeArgumentSeparatedBySemicolon()
         {
             //Given
-            IValidator firstLineValidator = new FirstLineValidator("EUR;550;JPY");
+            var firstLineParser = new FirstLineParser();
 
             //When
-            var contentIsValid = firstLineValidator.IsValid();
+            var contentIsValid = firstLineParser.IsValid("EUR;550;JPY");
 
             //Then
             Assert.True(contentIsValid);
@@ -35,10 +35,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenAFirstLineWithoutThreeElement_ThenLineIsNotValid()
         {
             //Given
-            IValidator firstLineValidator = new FirstLineValidator("EUR;550;JPY;4");
+            var firstLineParser = new FirstLineParser();
 
             //When
-            var contentIsValid = firstLineValidator.IsValid();
+            var contentIsValid = firstLineParser.IsValid("EUR;550;JPY;4");
 
             //Then
             Assert.False(contentIsValid);
@@ -48,10 +48,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenAFirstLineWithThreeElementUnordered_ThenLineIsNotValid()
         {
             //Given
-            IValidator firstLineValidator = new FirstLineValidator("550;EUR;JPY");
+            var firstLineParser = new FirstLineParser();
 
             //When
-            var contentIsValid = firstLineValidator.IsValid();
+            var contentIsValid = firstLineParser.IsValid("550;EUR;JPY");
 
             //Then
             Assert.False(contentIsValid);

@@ -1,18 +1,18 @@
-﻿using LuccaDevises.Validation;
+﻿using LuccaDevises.Parser;
 using Xunit;
 
-namespace LuccaDevises.Tests.Validation
+namespace LuccaDevises.Tests.Parser
 {
-    public class SecondLineValidatorTest
+    public class SecondLineParserTest
     {
         [Fact]
         public void GivenASecondLineWithPositiveInteger_ThenLineIsValid()
         {
             //Given
-            IValidator secondLineValidator = new SecondLineValidator("54");
+            var secondLineParser = new SecondLineParser();
 
             //When
-            var contentIsValid = secondLineValidator.IsValid();
+            var contentIsValid = secondLineParser.IsValid("54");
 
             //Then
             Assert.True(contentIsValid);
@@ -22,10 +22,10 @@ namespace LuccaDevises.Tests.Validation
         public void GivenASecondLineWithoutInteger_ThenLineIsNotValid()
         {
             //Given
-            IValidator secondLineValidator = new SecondLineValidator("54;PCD");
+            var secondLineParser = new SecondLineParser();
 
             //When
-            var contentIsValid = secondLineValidator.IsValid();
+            var contentIsValid = secondLineParser.IsValid("54;PCD");
 
             //Then
             Assert.False(contentIsValid);

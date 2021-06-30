@@ -1,19 +1,20 @@
-using LuccaDevises.Validation;
+using LuccaDevises.Parser;
 using System.Collections.Generic;
 using Xunit;
 
-namespace LuccaDevises.Tests.Validation
+namespace LuccaDevises.Tests.Parser
 {
-    public class ContentValidatorTest
+    public class ContentParserTest
     {
         [Fact]
         public void GivenAFileWithZeroLine_ThenContentIsNotValid()
         {
             //Given
             List<string> fileContent = new List<string>();
+            var contentParser = new ContentParser();
 
             //When
-            var contentIsValid = ContentValidator.IsValid(fileContent);
+            var contentIsValid = contentParser.IsValid(fileContent);
 
             //Then
             Assert.False(contentIsValid);
@@ -27,9 +28,10 @@ namespace LuccaDevises.Tests.Validation
             fileContent.Add("EUR;550;JPY");
             fileContent.Add("1");
             fileContent.Add("AUD;CHF;0.9661");
+            var contentParser = new ContentParser();
 
             //When
-            var contentIsValid = ContentValidator.IsValid(fileContent);
+            var contentIsValid = contentParser.IsValid(fileContent);
 
             //Then
             Assert.True(contentIsValid);
@@ -44,9 +46,10 @@ namespace LuccaDevises.Tests.Validation
             fileContent.Add("2");
             fileContent.Add("AUD;CHF;0.9661");
             fileContent.Add("JPY;CHF;0.9661");
+            var contentParser = new ContentParser();
 
             //When
-            var contentIsValid = ContentValidator.IsValid(fileContent);
+            var contentIsValid = contentParser.IsValid(fileContent);
 
             //Then
             Assert.True(contentIsValid);
@@ -61,9 +64,10 @@ namespace LuccaDevises.Tests.Validation
             fileContent.Add("4");
             fileContent.Add("AUD;CHF;0.9661");
             fileContent.Add("AUD;CFG;0.9661");
+            var contentParser = new ContentParser();
 
             //When
-            var contentIsValid = ContentValidator.IsValid(fileContent);
+            var contentIsValid = contentParser.IsValid(fileContent);
 
             //Then
             Assert.False(contentIsValid);
@@ -80,9 +84,10 @@ namespace LuccaDevises.Tests.Validation
             fileContent.Add("AUD;CFG;0.9661");
             fileContent.Add("AUD;CHF;0.9661");
             fileContent.Add("AUD;CHF;0.9");
+            var contentParser = new ContentParser();
 
             //When
-            var contentIsValid = ContentValidator.IsValid(fileContent);
+            var contentIsValid = contentParser.IsValid(fileContent);
 
             //Then
             Assert.False(contentIsValid);

@@ -1,17 +1,10 @@
 ﻿using System.Globalization;
 
-namespace LuccaDevises.Validation
+namespace LuccaDevises.Parser
 {
-    public class ExchangeRateValidator : IValidator
+    public class ExchangeRateParser
     {
-        private readonly string exchangeRate;
-
-        public ExchangeRateValidator(string exchangeRate)
-        {
-            this.exchangeRate = exchangeRate;
-        }
-
-        public bool IsValid()
+        public bool IsValid(string exchangeRate)
         {
             NumberStyles style = NumberStyles.Number;
 
