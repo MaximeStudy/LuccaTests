@@ -1,4 +1,5 @@
 ﻿using LuccaDevises.Domain.Graph;
+using System;
 using System.Collections.Generic;
 
 namespace LuccaDevises.Services.RouteFinder
@@ -29,9 +30,23 @@ namespace LuccaDevises.Services.RouteFinder
                             var weight = neighbor.Value.Weight;
                             if (distancePerVertex[neighborVertex] > (distancePerVertex[currentVertex] + weight))
                             {
+                                distancePerVertex[neighborVertex] = distancePerVertex[currentVertex] + weight;
                                 predecessor[neighborVertex] = currentVertex;
                             }
                         }
+                    }
+                }
+
+                var endWhile = false;
+                var currentElement = endingVertex;
+                while (!endWhile)
+                {
+                    Console.WriteLine(currentElement.Name);
+                    currentElement = predecessor[currentElement];
+                    if (currentElement.Equals(startingVertex))
+                    {
+                        Console.WriteLine(currentElement.Name);
+                        endWhile = true;
                     }
                 }
             }
@@ -73,7 +88,6 @@ namespace LuccaDevises.Services.RouteFinder
                 neighbors[vertex] = GetNeighbors(vertex, graph.Edges);
             }
             distancePerVertex[startingVertex] = 0;
-            unusedVertex.Remove(startingVertex);
         }
 
         private Vertex ChoseMinimalDistanceVertex(Dictionary<Vertex, int> distancePerVertex, Dictionary<Vertex, bool> unusedVertex)
