@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LuccaDevises.Domain;
+using System;
 
 namespace LuccaDevises.Parser
 {
@@ -13,7 +14,7 @@ namespace LuccaDevises.Parser
             this.positiveIntegerParser = positiveIntegerParser;
         }
 
-        public bool Parse(string line)
+        public TransformationGoal Parse(string line)
         {
             var splitLine = line.Split(';');
             if (splitLine.Length != 3)
@@ -25,7 +26,13 @@ namespace LuccaDevises.Parser
             var initialAmount = positiveIntegerParser.Parse(splitLine[1]);
             var currencyTwo = currencyParser.Parse(splitLine[2]);
 
-            return true;
+            TransformationGoal transformationGoal = new TransformationGoal
+            {
+                InitialCurrency = currencyOne,
+                InitialAmount = initialAmount,
+                TargetCurrency = currencyTwo
+            };
+            return transformationGoal;
         }
     }
 }

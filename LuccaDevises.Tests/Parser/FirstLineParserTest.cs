@@ -1,4 +1,5 @@
-﻿using LuccaDevises.Parser;
+﻿using LuccaDevises.Domain;
+using LuccaDevises.Parser;
 using System;
 using Xunit;
 
@@ -23,12 +24,18 @@ namespace LuccaDevises.Tests.Parser
         {
             //Given
             var lineWithThreeElement = "EUR;550;JPY";
+            var expectedResult = new TransformationGoal()
+            {
+                InitialAmount = 550,
+                InitialCurrency = "EUR",
+                TargetCurrency = "JPY"
+            };
 
             //When
-            var contentIsValid = firstLineParser.Parse(lineWithThreeElement);
+            var parsedValue = firstLineParser.Parse(lineWithThreeElement);
 
             //Then
-            Assert.True(contentIsValid);
+            Assert.Equal(expectedResult, parsedValue);
         }
 
         [Fact]
