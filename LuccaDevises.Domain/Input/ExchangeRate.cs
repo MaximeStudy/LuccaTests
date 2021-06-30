@@ -10,6 +10,8 @@ namespace LuccaDevises.Domain.Input
 
         public decimal Rate { get; init; }
 
+        public decimal InversedRate { get { return Math.Round(1 / Rate, 4); } }
+
         public override bool Equals(Object obj)
         {
             //Check for null and compare run-time types.

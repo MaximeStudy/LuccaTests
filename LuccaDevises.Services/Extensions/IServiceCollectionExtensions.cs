@@ -1,4 +1,5 @@
-﻿using LuccaDevises.Services.Factory;
+﻿using LuccaDevises.Services.Converter;
+using LuccaDevises.Services.Factory;
 using LuccaDevises.Services.Parser;
 using LuccaDevises.Services.RouteFinder;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +19,8 @@ namespace LuccaDevises.Services.Extensions
                                     .AddSingleton<ContentParser, ContentParser>()
                                     .AddSingleton<LuccaContentFactory, LuccaContentFactory>()
                                     .AddSingleton<GraphFactory, GraphFactory>()
-                                    .AddSingleton<DijstraAlgorithm, DijstraAlgorithm>();
+                                    .AddSingleton<DijstraAlgorithm, DijstraAlgorithm>()
+                                    .AddSingleton<CurrencyConverter, CurrencyConverter>();
         }
     }
 }

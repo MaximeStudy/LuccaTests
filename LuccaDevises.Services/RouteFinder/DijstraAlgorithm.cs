@@ -1,4 +1,5 @@
 ﻿using LuccaDevises.Domain.Graph;
+using LuccaDevises.Domain.RouteFinder;
 using System;
 using System.Collections.Generic;
 
@@ -6,8 +7,9 @@ namespace LuccaDevises.Services.RouteFinder
 {
     public class DijstraAlgorithm
     {
-        public void CalculateShortestPath(UndirectedGraph graph, Vertex startingVertex, Vertex endingVertex)
+        public ShortestPathResult CalculateShortestPath(UndirectedGraph graph, Vertex startingVertex, Vertex endingVertex)
         {
+            //TODO Unit test
             //TODO check that startingVertex and endingVertex are in graph
             //Verify O((A+N)logn) O(a+nlogn)
             //TODO Check positive weight for dijstra
@@ -40,30 +42,48 @@ namespace LuccaDevises.Services.RouteFinder
                     }
                 }
 
-                var endWhile = false;
-                var currentElement = endingVertex;
-                var stack = new Stack<Vertex>();
-                while (!endWhile)
+                ShortestPathResult shortestPathResult = new ShortestPathResult
                 {
-                    stack.Push(currentElement);
-                    currentElement = predecessor[currentElement];
-                    if (currentElement.Equals(startingVertex))
-                    {
-                        stack.Push(currentElement);
-                        endWhile = true;
-                    }
-                }
-                while (stack.Count > 0)
-                {
-                    Console.Write(stack.Pop() + " ");
-                }
-                Console.WriteLine();
-                Console.WriteLine($"Minimal distance : {distancePerVertex[endingVertex]}");
+                    Distance = distancePerVertex[endingVertex],
+                    VerticesOrder = GetVertexResultPath(startingVertex, endingVertex, predecessor)
+                };
+                PrintResult(shortestPathResult);
+                return shortestPathResult;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine("Error in Dijstra!");
+                throw;
             }
+        }
+
+        private static Stack<Vertex> GetVertexResultPath(Vertex startingVertex, Vertex endingVertex, Dictionary<Vertex, Vertex> predecessor)
+        {
+            var endWhile = false;
+            var currentElement = endingVertex;
+            var result = new Stack<Vertex>();
+            while (!endWhile)
+            {
+                result.Push(currentElement);
+                currentElement = predecessor[currentElement];
+                if (currentElement.Equals(startingVertex))
+                {
+                    result.Push(currentElement);
+                    endWhile = true;
+                }
+            }
+            return result;
+        }
+
+        private static void PrintResult(ShortestPathResult shortestPathResult)
+        {
+            var stack = new Stack<Vertex>(shortestPathResult.VerticesOrder);
+            while (stack.Count > 0)
+            {
+                Console.Write(stack.Pop() + " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Minimal distance : {shortestPathResult.Distance}");
         }
 
         private static Dictionary<Vertex, Edge> GetNeighbors(Vertex currentVertex, List<Edge> edges)
