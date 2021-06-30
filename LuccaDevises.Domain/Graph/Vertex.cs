@@ -31,5 +31,10 @@ namespace LuccaDevises.Domain.Graph
         {
             return Name.GetHashCode();
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

@@ -42,16 +42,23 @@ namespace LuccaDevises.Services.RouteFinder
 
                 var endWhile = false;
                 var currentElement = endingVertex;
+                var stack = new Stack<Vertex>();
                 while (!endWhile)
                 {
-                    Console.WriteLine(currentElement.Name);
+                    stack.Push(currentElement);
                     currentElement = predecessor[currentElement];
                     if (currentElement.Equals(startingVertex))
                     {
-                        Console.WriteLine(currentElement.Name);
+                        stack.Push(currentElement);
                         endWhile = true;
                     }
                 }
+                while (stack.Count > 0)
+                {
+                    Console.Write(stack.Pop() + " ");
+                }
+                Console.WriteLine();
+                Console.WriteLine($"Minimal distance : {distancePerVertex[endingVertex]}");
             }
             catch (Exception ex)
             {
