@@ -1,4 +1,5 @@
 using LuccaDevises.Parser;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -82,10 +83,9 @@ namespace LuccaDevises.Tests.Parser
             fileContent.Add("AUD;CHF;0.9");
 
             //When
-            var contentIsValid = contentParser.IsValid(fileContent);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => contentParser.IsValid(fileContent));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LuccaDevises.Parser;
+using System;
 using Xunit;
 
 namespace LuccaDevises.Tests.Parser
@@ -10,12 +11,13 @@ namespace LuccaDevises.Tests.Parser
         {
             //Given
             var anExchangeRate = "86.0202";
+            decimal expectedExchangeRate = 86.0202M;
 
             //When
-            var contentIsValid = exchangeRateParser.IsValid(anExchangeRate);
+            var exchangeRate = exchangeRateParser.Parse(anExchangeRate);
 
             //Then
-            Assert.True(contentIsValid);
+            Assert.Equal(expectedExchangeRate, exchangeRate);
         }
 
         [Fact]
@@ -25,10 +27,9 @@ namespace LuccaDevises.Tests.Parser
             var anExchangeRateWithCurrency = "86.0202$";
 
             //When
-            var contentIsValid = exchangeRateParser.IsValid(anExchangeRateWithCurrency);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => exchangeRateParser.Parse(anExchangeRateWithCurrency));
         }
 
         [Fact]
@@ -36,12 +37,13 @@ namespace LuccaDevises.Tests.Parser
         {
             //Given
             var anExchangeWithFourDecimal = "86.0202";
+            decimal expectedExchangeRate = 86.0202M;
 
             //When
-            var contentIsValid = exchangeRateParser.IsValid(anExchangeWithFourDecimal);
+            var exchangeRate = exchangeRateParser.Parse(anExchangeWithFourDecimal);
 
             //Then
-            Assert.True(contentIsValid);
+            Assert.Equal(expectedExchangeRate, exchangeRate);
         }
 
         [Fact]
@@ -51,10 +53,9 @@ namespace LuccaDevises.Tests.Parser
             var anExchangeWithoutFourDecimal = "86.022";
 
             //When
-            var contentIsValid = exchangeRateParser.IsValid(anExchangeWithoutFourDecimal);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => exchangeRateParser.Parse(anExchangeWithoutFourDecimal));
         }
 
         [Fact]
@@ -64,10 +65,9 @@ namespace LuccaDevises.Tests.Parser
             var anExchangeWithoutPrecision = "86";
 
             //When
-            var contentIsValid = exchangeRateParser.IsValid(anExchangeWithoutPrecision);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => exchangeRateParser.Parse(anExchangeWithoutPrecision));
         }
     }
 }

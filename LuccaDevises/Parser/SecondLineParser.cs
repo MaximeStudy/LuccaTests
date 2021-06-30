@@ -9,10 +9,9 @@
             this.positiveIntegerParser = positiveIntegerParser;
         }
 
-        public bool IsValid(string line)
+        public int Parse(string line)
         {
-            var numberOfElement = positiveIntegerParser.Parse(line);
-            return true;
+            return positiveIntegerParser.Parse(line);
         }
     }
 }

@@ -11,12 +11,13 @@ namespace LuccaDevises.Tests.Parser
         {
             //Given
             var positiveInteger = "54";
+            int expectedIntValue = 54;
 
             //When
-            var contentIsValid = secondLineParser.IsValid(positiveInteger);
+            var parsedValue = secondLineParser.Parse(positiveInteger);
 
             //Then
-            Assert.True(contentIsValid);
+            Assert.Equal(expectedIntValue, parsedValue);
         }
 
         [Fact]
@@ -28,7 +29,7 @@ namespace LuccaDevises.Tests.Parser
             //When
 
             //Then
-            Assert.Throws<ArgumentException>(() => secondLineParser.IsValid(lineWithoutInteger));
+            Assert.Throws<ArgumentException>(() => secondLineParser.Parse(lineWithoutInteger));
         }
     }
 }

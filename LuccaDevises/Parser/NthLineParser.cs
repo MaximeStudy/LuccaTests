@@ -21,7 +21,8 @@
 
             var currencyOne = currencyParser.Parse(splitLine[0]);
             var currencyTwo = currencyParser.Parse(splitLine[1]);
-            return exchangeRateParser.IsValid(splitLine[2]);
+            var exchangeRate = exchangeRateParser.Parse(splitLine[2]);
+            return true;
         }
     }
 }

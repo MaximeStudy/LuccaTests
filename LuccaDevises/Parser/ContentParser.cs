@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LuccaDevises.Parser
 {
@@ -22,9 +21,10 @@ namespace LuccaDevises.Parser
             {
                 return false;
             }
-            if (firstLineParser.IsValid(fileContent[0]) && secondLineParser.IsValid(fileContent[1]))
+
+            var numberOfExchangeRate = secondLineParser.Parse(fileContent[1]);
+            if (firstLineParser.IsValid(fileContent[0]))
             {
-                var numberOfExchangeRate = int.Parse(fileContent[1]);
                 if (fileContent.Count != numberOfExchangeRate + 2)
                 {
                     return false;
