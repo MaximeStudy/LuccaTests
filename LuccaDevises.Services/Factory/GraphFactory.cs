@@ -12,7 +12,7 @@ namespace LuccaDevises.Services.Factory
             var vertices = exchangeRates
                                      .SelectMany(ip => new[] { ip.StartCurrency, ip.EndCurrency })
                                      .Distinct()
-                                     .Select(vertice => new Vertex(vertice))
+                                     .Select(vertex => CreateVertex(vertex))
                                      .ToList();
 
             var edges = exchangeRates
@@ -20,6 +20,11 @@ namespace LuccaDevises.Services.Factory
                                   .ToList();
 
             return new Graph(vertices, edges);
+        }
+
+        public Vertex CreateVertex(string vertex)
+        {
+            return new Vertex(vertex);
         }
 
         public Edge CreateEdge(ExchangeRate exchangeRate)

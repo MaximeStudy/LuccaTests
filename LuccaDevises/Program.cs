@@ -1,5 +1,6 @@
 ﻿using LuccaDevises.Services.Extensions;
 using LuccaDevises.Services.Factory;
+using LuccaDevises.Services.RouteFinder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -23,8 +24,15 @@ namespace LuccaDevises
             try
             {
                 string filePath = args[0];
-                var inputState = serviceProvider.GetService<LuccaContentFactory>().Create(filePath);
-                var graph = serviceProvider.GetService<GraphFactory>().Create(inputState.ExchangeRates);
+                var luccaContentFactory = serviceProvider.GetService<LuccaContentFactory>();
+                var graphFactory = serviceProvider.GetService<GraphFactory>();
+                var dijstraAlgorithm = serviceProvider.GetService<DijstraAlgorithm>();
+
+                var inputState = luccaContentFactory.Create(filePath);
+                var graph = graphFactory.Create(inputState.ExchangeRates);
+                var startVertex = graphFactory.CreateVertex(inputState.TransformationGoal.InitialCurrency);
+                var endVertex = graphFactory.CreateVertex(inputState.TransformationGoal.TargetCurrency);
+                dijstraAlgorithm.CalculateShortestPath(graph, startVertex, endVertex);
             }
             catch (Exception ex)
             {
