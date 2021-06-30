@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace LuccaDevises.Parser
+namespace LuccaDevises.Services.Parser
 {
     public class ContentParser
     {
@@ -34,7 +34,7 @@ namespace LuccaDevises.Parser
             };
             if (fileContent.Count != numberOfExchangeRate + 2)
             {
-                throw new ArgumentException($"Number of exchange rate does not match with real total of exchange number!");
+                throw new ArgumentException($"Number of exchange rate {numberOfExchangeRate} does not match with real total of exchange number {fileContent.Count - 2}!");
             }
 
             for (int i = 2; i < fileContent.Count; i++)

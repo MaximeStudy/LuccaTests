@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace LuccaDevises.Parser
+namespace LuccaDevises.Services.Parser
 {
     public class ExchangeRateParser
     {

@@ -1,4 +1,4 @@
-﻿using LuccaDevises.Parser;
+﻿using LuccaDevises.Services.Parser;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
@@ -34,7 +34,14 @@ namespace LuccaDevises
                 var inputFile = File.ReadAllText(filePath)
                                     .Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
                                     .ToList();
-                //serviceProvider.GetService<ContentParser>().Parse(inputFile);
+                try
+                {
+                    //var test = serviceProvider.GetService<ContentParser>().Parse(inputFile);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
             else
             {

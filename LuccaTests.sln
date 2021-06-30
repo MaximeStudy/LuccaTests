@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuccaDevises.Tests", "Lucca
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuccaDevises.Domain", "LuccaDevises.Domain\LuccaDevises.Domain.csproj", "{E2A6C4EE-B0D2-4185-B63F-5190A51D9FD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuccaDevises.Services", "LuccaDevises.Services\LuccaDevises.Services.csproj", "{8DE4D557-898F-4B11-88C8-3C9AC66505DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E2A6C4EE-B0D2-4185-B63F-5190A51D9FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2A6C4EE-B0D2-4185-B63F-5190A51D9FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2A6C4EE-B0D2-4185-B63F-5190A51D9FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DE4D557-898F-4B11-88C8-3C9AC66505DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DE4D557-898F-4B11-88C8-3C9AC66505DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DE4D557-898F-4B11-88C8-3C9AC66505DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DE4D557-898F-4B11-88C8-3C9AC66505DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

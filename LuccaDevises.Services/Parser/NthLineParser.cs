@@ -1,7 +1,7 @@
 ﻿using LuccaDevises.Domain;
 using System;
 
-namespace LuccaDevises.Parser
+namespace LuccaDevises.Services.Parser
 {
     public class NthLineParser
     {

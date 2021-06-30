@@ -1,4 +1,4 @@
-﻿namespace LuccaDevises.Parser
+﻿namespace LuccaDevises.Services.Parser
 {
     public class SecondLineParser
     {

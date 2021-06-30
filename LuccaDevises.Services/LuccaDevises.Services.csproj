@@ -1,17 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\LuccaDevises.Domain\LuccaDevises.Domain.csproj" />
-    <ProjectReference Include="..\LuccaDevises.Services\LuccaDevises.Services.csproj" />
   </ItemGroup>
 
 </Project>

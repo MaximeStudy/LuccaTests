@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LuccaDevises.Parser
+namespace LuccaDevises.Services.Parser
 {
     public class CurrencyParser
     {
@@ -10,7 +10,7 @@ namespace LuccaDevises.Parser
             {
                 return currency;
             }
-            throw new ArgumentException("Currency is not 3 chars!"); ;
+            throw new ArgumentException($"Currency {currency} is not 3 chars!"); ;
         }
     }
 }
