@@ -1,4 +1,5 @@
-﻿using LuccaDevises.Services.Parser;
+﻿using LuccaDevises.Services.Factory;
+using LuccaDevises.Services.Parser;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LuccaDevises.Services.Extensions
@@ -13,7 +14,8 @@ namespace LuccaDevises.Services.Extensions
                                     .AddSingleton<FirstLineParser, FirstLineParser>()
                                     .AddSingleton<SecondLineParser, SecondLineParser>()
                                     .AddSingleton<NthLineParser, NthLineParser>()
-                                    .AddSingleton<ContentParser, ContentParser>();
+                                    .AddSingleton<ContentParser, ContentParser>()
+                                    .AddSingleton<LuccaContentFactory, LuccaContentFactory>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using LuccaDevises.Services.Extensions;
+using LuccaDevises.Services.Factory;
 using LuccaDevises.Services.Parser;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -23,24 +24,13 @@ namespace LuccaDevises
             }
 
             string filePath = args[0];
-            if (File.Exists(filePath))
+            try
             {
-                Console.WriteLine("Ok");
-                var inputFile = File.ReadAllText(filePath)
-                                    .Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
-                                    .ToList();
-                try
-                {
-                    var test = serviceProvider.GetService<ContentParser>().Parse(inputFile);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
+                var inputState = serviceProvider.GetService<LuccaContentFactory>().Create(filePath);
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine($"File {filePath} does not exists.");
+                Console.WriteLine(ex.Message);
             }
         }
     }
