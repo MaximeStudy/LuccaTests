@@ -3,13 +3,12 @@ using Xunit;
 
 namespace LuccaDevises.Tests.Parser
 {
-    public class FirstLineParserTest
+    public class FirstLineParserTest : ParserTest
     {
         [Fact]
         public void GivenAnEmptyFirstLine_ThenLineIsNotValid()
         {
             //Given
-            var firstLineParser = new FirstLineParser();
 
             //When
             var contentIsValid = firstLineParser.IsValid("");
@@ -22,7 +21,6 @@ namespace LuccaDevises.Tests.Parser
         public void GivenAFirstLineWithThreeElement_ThenTheLineShouldHaveThreeArgumentSeparatedBySemicolon()
         {
             //Given
-            var firstLineParser = new FirstLineParser();
 
             //When
             var contentIsValid = firstLineParser.IsValid("EUR;550;JPY");
@@ -35,7 +33,6 @@ namespace LuccaDevises.Tests.Parser
         public void GivenAFirstLineWithoutThreeElement_ThenLineIsNotValid()
         {
             //Given
-            var firstLineParser = new FirstLineParser();
 
             //When
             var contentIsValid = firstLineParser.IsValid("EUR;550;JPY;4");
@@ -48,7 +45,6 @@ namespace LuccaDevises.Tests.Parser
         public void GivenAFirstLineWithThreeElementUnordered_ThenLineIsNotValid()
         {
             //Given
-            var firstLineParser = new FirstLineParser();
 
             //When
             var contentIsValid = firstLineParser.IsValid("550;EUR;JPY");

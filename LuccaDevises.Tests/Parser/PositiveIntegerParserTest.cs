@@ -3,13 +3,12 @@ using Xunit;
 
 namespace LuccaDevises.Tests.Parser
 {
-    public class PositiveIntegerParserTest
+    public class PositiveIntegerParserTest : ParserTest
     {
         [Fact]
         public void GivenAnAmountGreaterThanZero_ThenAmountIsValid()
         {
             //Given
-            var positiveIntegerParser = new PositiveIntegerParser();
 
             //When
             var contentIsValid = positiveIntegerParser.IsValid("154");
@@ -22,7 +21,6 @@ namespace LuccaDevises.Tests.Parser
         public void GivenAnAmountLowerThanZero_ThenAmountIsNotValid()
         {
             //Given
-            var positiveIntegerParser = new PositiveIntegerParser();
 
             //When
             var contentIsValid = positiveIntegerParser.IsValid("-5");
@@ -35,7 +33,6 @@ namespace LuccaDevises.Tests.Parser
         public void GivenAnAmounEqualToZero_ThenAmountIsNotValid()
         {
             //Given
-            var positiveIntegerParser = new PositiveIntegerParser();
 
             //When
             var contentIsValid = positiveIntegerParser.IsValid("0");
@@ -48,7 +45,6 @@ namespace LuccaDevises.Tests.Parser
         public void GivenAnAmountThatIsNotAnInteger_ThenAmountIsNotValid()
         {
             //Given
-            var positiveIntegerParser = new PositiveIntegerParser();
 
             //When
             var contentIsValid = positiveIntegerParser.IsValid("5.5");

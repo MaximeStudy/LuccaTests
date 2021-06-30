@@ -2,6 +2,15 @@
 {
     public class FirstLineParser
     {
+        private readonly CurrencyParser currencyParser;
+        private readonly PositiveIntegerParser positiveIntegerParser;
+
+        public FirstLineParser(CurrencyParser currencyParser, PositiveIntegerParser positiveIntegerParser)
+        {
+            this.currencyParser = currencyParser;
+            this.positiveIntegerParser = positiveIntegerParser;
+        }
+
         public bool IsValid(string line)
         {
             var splitLine = line.Split(';');
@@ -10,11 +19,10 @@
                 return false;
             }
 
-            var currencyOne = new CurrencyParser();
-            var amount = new PositiveIntegerParser();
-            var currencyTwo = new CurrencyParser();
+            var currencyOne = currencyParser.Parse(splitLine[0]);
+            var currencyTwo = currencyParser.Parse(splitLine[2]);
 
-            return currencyOne.IsValid(splitLine[0]) && amount.IsValid(splitLine[1]) && currencyTwo.IsValid(splitLine[2]);
+            return positiveIntegerParser.IsValid(splitLine[1]);
         }
     }
 }

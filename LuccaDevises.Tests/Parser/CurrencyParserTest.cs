@@ -1,34 +1,33 @@
 ﻿using LuccaDevises.Parser;
+using System;
 using Xunit;
 
 namespace LuccaDevises.Tests.Parser
 {
-    public class CurrencyParserTest
+    public class CurrencyParserTest : ParserTest
     {
         [Fact]
         public void GivenACurrencyWith3Letter_ThenIsValid()
         {
             //Given
-            var currencyParser = new CurrencyParser();
-
+            string expectedResult = "EUR";
             //When
-            var contentIsValid = currencyParser.IsValid("EUR");
+
+            var parsedValue = currencyParser.Parse("EUR");
 
             //Then
-            Assert.True(contentIsValid);
+            Assert.Equal(expectedResult, parsedValue);
         }
 
         [Fact]
         public void GivenACurrencyWithout3Letter_ThenIsNotValid()
         {
             //Given
-            var currencyParser = new CurrencyParser();
 
             //When
-            var contentIsValid = currencyParser.IsValid("EU3aR");
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => currencyParser.Parse("EU3aR"));
         }
     }
 }

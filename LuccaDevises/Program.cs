@@ -9,6 +9,12 @@ namespace LuccaDevises
     internal class Program
     {
         private static readonly ServiceProvider serviceProvider = new ServiceCollection()
+                                                                    .AddSingleton<CurrencyParser, CurrencyParser>()
+                                                                    .AddSingleton<PositiveIntegerParser, PositiveIntegerParser>()
+                                                                    .AddSingleton<ExchangeRateParser, ExchangeRateParser>()
+                                                                    .AddSingleton<FirstLineParser, FirstLineParser>()
+                                                                    .AddSingleton<SecondLineParser, SecondLineParser>()
+                                                                    .AddSingleton<NthLineParser, NthLineParser>()
                                                                     .AddSingleton<ContentParser, ContentParser>()
                                                                     .BuildServiceProvider();
 

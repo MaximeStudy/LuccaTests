@@ -3,13 +3,12 @@ using Xunit;
 
 namespace LuccaDevises.Tests.Parser
 {
-    public class SecondLineParserTest
+    public class SecondLineParserTest : ParserTest
     {
         [Fact]
         public void GivenASecondLineWithPositiveInteger_ThenLineIsValid()
         {
             //Given
-            var secondLineParser = new SecondLineParser();
 
             //When
             var contentIsValid = secondLineParser.IsValid("54");
@@ -22,7 +21,6 @@ namespace LuccaDevises.Tests.Parser
         public void GivenASecondLineWithoutInteger_ThenLineIsNotValid()
         {
             //Given
-            var secondLineParser = new SecondLineParser();
 
             //When
             var contentIsValid = secondLineParser.IsValid("54;PCD");

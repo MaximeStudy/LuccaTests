@@ -1,14 +1,16 @@
-﻿namespace LuccaDevises.Parser
+﻿using System;
+
+namespace LuccaDevises.Parser
 {
     public class CurrencyParser
     {
-        public bool IsValid(string currency)
+        public string Parse(string currency)
         {
             if (currency.Length == 3)
             {
-                return true;
+                return currency;
             }
-            return false;
+            throw new ArgumentException("Currency is not 3 chars!"); ;
         }
     }
 }
