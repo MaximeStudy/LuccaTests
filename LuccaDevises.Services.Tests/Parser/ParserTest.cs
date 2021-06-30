@@ -1,6 +1,6 @@
 ﻿using LuccaDevises.Services.Parser;
 
-namespace LuccaDevises.Tests.Parser
+namespace LuccaDevises.Services.Tests.Parser
 {
     public class ParserTest
     {

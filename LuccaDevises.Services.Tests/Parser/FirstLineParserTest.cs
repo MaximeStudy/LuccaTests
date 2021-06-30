@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace LuccaDevises.Tests.Parser
+namespace LuccaDevises.Services.Tests.Parser
 {
     public class FirstLineParserTest : ParserTest
     {

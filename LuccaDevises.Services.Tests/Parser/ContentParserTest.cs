@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace LuccaDevises.Tests.Parser
+namespace LuccaDevises.Services.Tests.Parser
 {
     public class ContentParserTest : ParserTest
     {
