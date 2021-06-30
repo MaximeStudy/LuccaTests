@@ -1,4 +1,5 @@
-﻿using LuccaDevises.Services.Parser;
+﻿using LuccaDevises.Services;
+using LuccaDevises.Services.Parser;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
@@ -9,13 +10,7 @@ namespace LuccaDevises
     internal class Program
     {
         private static readonly ServiceProvider serviceProvider = new ServiceCollection()
-                                                                    .AddSingleton<CurrencyParser, CurrencyParser>()
-                                                                    .AddSingleton<PositiveIntegerParser, PositiveIntegerParser>()
-                                                                    .AddSingleton<ExchangeRateParser, ExchangeRateParser>()
-                                                                    .AddSingleton<FirstLineParser, FirstLineParser>()
-                                                                    .AddSingleton<SecondLineParser, SecondLineParser>()
-                                                                    .AddSingleton<NthLineParser, NthLineParser>()
-                                                                    .AddSingleton<ContentParser, ContentParser>()
+                                                                    .AddParserServices()
                                                                     .BuildServiceProvider();
 
         private static void Main(string[] args)
@@ -36,7 +31,7 @@ namespace LuccaDevises
                                     .ToList();
                 try
                 {
-                    //var test = serviceProvider.GetService<ContentParser>().Parse(inputFile);
+                    var test = serviceProvider.GetService<ContentParser>().Parse(inputFile);
                 }
                 catch (Exception ex)
                 {
