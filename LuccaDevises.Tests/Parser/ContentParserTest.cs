@@ -32,7 +32,8 @@ namespace LuccaDevises.Tests.Parser
             var parsedValue = contentParser.Parse(fileContent);
 
             //Then
-            Assert.True(parsedValue);
+            Assert.NotNull(parsedValue?.TransformationGoal);
+            Assert.NotNull(parsedValue?.ExchangeRates);
         }
 
         [Fact]
@@ -44,12 +45,13 @@ namespace LuccaDevises.Tests.Parser
             fileContent.Add("2");
             fileContent.Add("AUD;CHF;0.9661");
             fileContent.Add("JPY;CHF;0.9661");
+            var expectedNumberExchangeRate = 2;
 
             //When
             var parsedValue = contentParser.Parse(fileContent);
 
             //Then
-            Assert.True(parsedValue);
+            Assert.Equal(expectedNumberExchangeRate, parsedValue.ExchangeRates.Count);
         }
 
         [Fact]

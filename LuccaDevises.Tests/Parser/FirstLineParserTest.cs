@@ -1,5 +1,4 @@
 ﻿using LuccaDevises.Domain;
-using LuccaDevises.Parser;
 using System;
 using Xunit;
 

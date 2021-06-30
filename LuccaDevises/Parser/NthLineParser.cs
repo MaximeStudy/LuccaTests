@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LuccaDevises.Domain;
+using System;
 
 namespace LuccaDevises.Parser
 {
@@ -13,7 +14,7 @@ namespace LuccaDevises.Parser
             this.exchangeRateParser = exchangeRateParser;
         }
 
-        public bool Parse(string line)
+        public ExchangeRate Parse(string line)
         {
             var splitLine = line.Split(';');
             if (splitLine.Length != 3)
@@ -23,8 +24,16 @@ namespace LuccaDevises.Parser
 
             var currencyOne = currencyParser.Parse(splitLine[0]);
             var currencyTwo = currencyParser.Parse(splitLine[1]);
-            var exchangeRate = exchangeRateParser.Parse(splitLine[2]);
-            return true;
+            var rate = exchangeRateParser.Parse(splitLine[2]);
+
+            var exchangeRate = new ExchangeRate
+            {
+                StartCurrency = currencyOne,
+                EndCurrency = currencyTwo,
+                Rate = rate
+            };
+
+            return exchangeRate;
         }
     }
 }
