@@ -1,4 +1,5 @@
 ﻿using LuccaDevises.Parser;
+using System;
 using Xunit;
 
 namespace LuccaDevises.Tests.Parser
@@ -51,10 +52,9 @@ namespace LuccaDevises.Tests.Parser
             var lineWithThreeElementUnordered = "550;EUR;JPY";
 
             //When
-            var contentIsValid = firstLineParser.IsValid(lineWithThreeElementUnordered);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => firstLineParser.IsValid(lineWithThreeElementUnordered));
         }
     }
 }

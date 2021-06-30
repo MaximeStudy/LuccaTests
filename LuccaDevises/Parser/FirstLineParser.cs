@@ -20,9 +20,10 @@
             }
 
             var currencyOne = currencyParser.Parse(splitLine[0]);
+            var initialAmount = positiveIntegerParser.Parse(splitLine[1]);
             var currencyTwo = currencyParser.Parse(splitLine[2]);
 
-            return positiveIntegerParser.IsValid(splitLine[1]);
+            return true;
         }
     }
 }

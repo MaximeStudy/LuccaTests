@@ -1,4 +1,5 @@
 ﻿using LuccaDevises.Parser;
+using System;
 using Xunit;
 
 namespace LuccaDevises.Tests.Parser
@@ -10,12 +11,13 @@ namespace LuccaDevises.Tests.Parser
         {
             //Given
             var amountGreaterThanZero = "154";
+            int expectedResult = 154;
 
             //When
-            var contentIsValid = positiveIntegerParser.IsValid(amountGreaterThanZero);
+            var parsedValue = positiveIntegerParser.Parse(amountGreaterThanZero);
 
             //Then
-            Assert.True(contentIsValid);
+            Assert.Equal(expectedResult, parsedValue);
         }
 
         [Fact]
@@ -25,10 +27,9 @@ namespace LuccaDevises.Tests.Parser
             var amountLowerThanZero = "-5";
 
             //When
-            var contentIsValid = positiveIntegerParser.IsValid(amountLowerThanZero);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => positiveIntegerParser.Parse(amountLowerThanZero));
         }
 
         [Fact]
@@ -38,10 +39,9 @@ namespace LuccaDevises.Tests.Parser
             var amountEqualZero = "0";
 
             //When
-            var contentIsValid = positiveIntegerParser.IsValid(amountEqualZero);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => positiveIntegerParser.Parse(amountEqualZero));
         }
 
         [Fact]
@@ -51,10 +51,9 @@ namespace LuccaDevises.Tests.Parser
             var amountNotInteger = "5.5";
 
             //When
-            var contentIsValid = positiveIntegerParser.IsValid(amountNotInteger);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => positiveIntegerParser.Parse(amountNotInteger));
         }
     }
 }

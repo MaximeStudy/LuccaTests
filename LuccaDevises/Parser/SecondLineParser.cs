@@ -11,7 +11,8 @@
 
         public bool IsValid(string line)
         {
-            return positiveIntegerParser.IsValid(line);
+            var numberOfElement = positiveIntegerParser.Parse(line);
+            return true;
         }
     }
 }

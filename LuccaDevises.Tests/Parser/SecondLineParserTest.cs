@@ -1,4 +1,5 @@
 ﻿using LuccaDevises.Parser;
+using System;
 using Xunit;
 
 namespace LuccaDevises.Tests.Parser
@@ -25,10 +26,9 @@ namespace LuccaDevises.Tests.Parser
             var lineWithoutInteger = "54;PCD";
 
             //When
-            var contentIsValid = secondLineParser.IsValid(lineWithoutInteger);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => secondLineParser.IsValid(lineWithoutInteger));
         }
     }
 }
