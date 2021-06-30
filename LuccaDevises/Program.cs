@@ -24,6 +24,7 @@ namespace LuccaDevises
             {
                 string filePath = args[0];
                 var inputState = serviceProvider.GetService<LuccaContentFactory>().Create(filePath);
+                var graph = serviceProvider.GetService<GraphFactory>().Create(inputState.ExchangeRates);
             }
             catch (Exception ex)
             {
