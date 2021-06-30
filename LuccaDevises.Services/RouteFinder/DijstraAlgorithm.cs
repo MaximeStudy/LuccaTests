@@ -8,6 +8,9 @@ namespace LuccaDevises.Services.RouteFinder
     {
         public void CalculateShortestPath(UndirectedGraph graph, Vertex startingVertex, Vertex endingVertex)
         {
+            //TODO check that startingVertex and endingVertex are in graph
+            //Verify O((A+N)logn) O(a+nlogn)
+            //TODO Check positive weight for dijstra
             try
             {
                 //https://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra
@@ -50,9 +53,9 @@ namespace LuccaDevises.Services.RouteFinder
                     }
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                System.Console.WriteLine(ex);
+                Console.WriteLine(ex);
             }
         }
 
