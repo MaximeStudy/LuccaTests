@@ -9,9 +9,10 @@ namespace LuccaDevises.Tests.Parser
         public void GivenAnAmountGreaterThanZero_ThenAmountIsValid()
         {
             //Given
+            var amountGreaterThanZero = "154";
 
             //When
-            var contentIsValid = positiveIntegerParser.IsValid("154");
+            var contentIsValid = positiveIntegerParser.IsValid(amountGreaterThanZero);
 
             //Then
             Assert.True(contentIsValid);
@@ -21,21 +22,23 @@ namespace LuccaDevises.Tests.Parser
         public void GivenAnAmountLowerThanZero_ThenAmountIsNotValid()
         {
             //Given
+            var amountLowerThanZero = "-5";
 
             //When
-            var contentIsValid = positiveIntegerParser.IsValid("-5");
+            var contentIsValid = positiveIntegerParser.IsValid(amountLowerThanZero);
 
             //Then
             Assert.False(contentIsValid);
         }
 
         [Fact]
-        public void GivenAnAmounEqualToZero_ThenAmountIsNotValid()
+        public void GivenAnAmountEqualToZero_ThenAmountIsNotValid()
         {
             //Given
+            var amountEqualZero = "0";
 
             //When
-            var contentIsValid = positiveIntegerParser.IsValid("0");
+            var contentIsValid = positiveIntegerParser.IsValid(amountEqualZero);
 
             //Then
             Assert.False(contentIsValid);
@@ -45,9 +48,10 @@ namespace LuccaDevises.Tests.Parser
         public void GivenAnAmountThatIsNotAnInteger_ThenAmountIsNotValid()
         {
             //Given
+            var amountNotInteger = "5.5";
 
             //When
-            var contentIsValid = positiveIntegerParser.IsValid("5.5");
+            var contentIsValid = positiveIntegerParser.IsValid(amountNotInteger);
 
             //Then
             Assert.False(contentIsValid);

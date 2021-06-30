@@ -9,9 +9,10 @@ namespace LuccaDevises.Tests.Parser
         public void GivenExchangeRate_ThenSeparatorIsPoint()
         {
             //Given
+            var anExchangeRate = "86.0202";
 
             //When
-            var contentIsValid = exchangeRateParser.IsValid("86.0202");
+            var contentIsValid = exchangeRateParser.IsValid(anExchangeRate);
 
             //Then
             Assert.True(contentIsValid);
@@ -21,9 +22,10 @@ namespace LuccaDevises.Tests.Parser
         public void GivenExchangeRate_ThenCurrencySymbolAreNotAccepted()
         {
             //Given
+            var anExchangeRateWithCurrency = "86.0202$";
 
             //When
-            var contentIsValid = exchangeRateParser.IsValid("86.0202$");
+            var contentIsValid = exchangeRateParser.IsValid(anExchangeRateWithCurrency);
 
             //Then
             Assert.False(contentIsValid);
@@ -33,9 +35,10 @@ namespace LuccaDevises.Tests.Parser
         public void GivenExchangeRatePrecisionIsFourDecimals_ThenIsValid()
         {
             //Given
+            var anExchangeWithFourDecimal = "86.0202";
 
             //When
-            var contentIsValid = exchangeRateParser.IsValid("86.0202");
+            var contentIsValid = exchangeRateParser.IsValid(anExchangeWithFourDecimal);
 
             //Then
             Assert.True(contentIsValid);
@@ -45,9 +48,10 @@ namespace LuccaDevises.Tests.Parser
         public void GivenExchangeRatePrecisionWithoutFourDecimals_ThenIsNotValid()
         {
             //Given
+            var anExchangeWithoutFourDecimal = "86.022";
 
             //When
-            var contentIsValid = exchangeRateParser.IsValid("86.022");
+            var contentIsValid = exchangeRateParser.IsValid(anExchangeWithoutFourDecimal);
 
             //Then
             Assert.False(contentIsValid);
@@ -57,9 +61,10 @@ namespace LuccaDevises.Tests.Parser
         public void GivenExchangeRateWithoutPrecision_ThenIsNotValid()
         {
             //Given
+            var anExchangeWithoutPrecision = "86";
 
             //When
-            var contentIsValid = exchangeRateParser.IsValid("86");
+            var contentIsValid = exchangeRateParser.IsValid(anExchangeWithoutPrecision);
 
             //Then
             Assert.False(contentIsValid);

@@ -10,24 +10,25 @@ namespace LuccaDevises.Tests.Parser
         public void GivenACurrencyWith3Letter_ThenIsValid()
         {
             //Given
-            string expectedResult = "EUR";
-            //When
+            string currencyWithThreeLetter = "EUR";
 
-            var parsedValue = currencyParser.Parse("EUR");
+            //When
+            var parsedValue = currencyParser.Parse(currencyWithThreeLetter);
 
             //Then
-            Assert.Equal(expectedResult, parsedValue);
+            Assert.Equal(currencyWithThreeLetter, parsedValue);
         }
 
         [Fact]
         public void GivenACurrencyWithout3Letter_ThenIsNotValid()
         {
             //Given
+            string currencyWithoutThreeLetter = "EU3aR";
 
             //When
 
             //Then
-            Assert.Throws<ArgumentException>(() => currencyParser.Parse("EU3aR"));
+            Assert.Throws<ArgumentException>(() => currencyParser.Parse(currencyWithoutThreeLetter));
         }
     }
 }

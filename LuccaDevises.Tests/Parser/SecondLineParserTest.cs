@@ -9,9 +9,10 @@ namespace LuccaDevises.Tests.Parser
         public void GivenASecondLineWithPositiveInteger_ThenLineIsValid()
         {
             //Given
+            var positiveInteger = "54";
 
             //When
-            var contentIsValid = secondLineParser.IsValid("54");
+            var contentIsValid = secondLineParser.IsValid(positiveInteger);
 
             //Then
             Assert.True(contentIsValid);
@@ -21,9 +22,10 @@ namespace LuccaDevises.Tests.Parser
         public void GivenASecondLineWithoutInteger_ThenLineIsNotValid()
         {
             //Given
+            var lineWithoutInteger = "54;PCD";
 
             //When
-            var contentIsValid = secondLineParser.IsValid("54;PCD");
+            var contentIsValid = secondLineParser.IsValid(lineWithoutInteger);
 
             //Then
             Assert.False(contentIsValid);
