@@ -6,7 +6,7 @@ namespace LuccaDevises.Services.Extensions
 {
     public static class IServiceCollectionExtensions
     {
-        public static IServiceCollection AddLuccaDevicesServices(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddLuccaDevisesServices(this IServiceCollection serviceCollection)
         {
             return serviceCollection.AddSingleton<CurrencyParser, CurrencyParser>()
                                     .AddSingleton<PositiveIntegerParser, PositiveIntegerParser>()
@@ -15,7 +15,8 @@ namespace LuccaDevises.Services.Extensions
                                     .AddSingleton<SecondLineParser, SecondLineParser>()
                                     .AddSingleton<NthLineParser, NthLineParser>()
                                     .AddSingleton<ContentParser, ContentParser>()
-                                    .AddSingleton<LuccaContentFactory, LuccaContentFactory>();
+                                    .AddSingleton<LuccaContentFactory, LuccaContentFactory>()
+                                    .AddSingleton<GraphFactory, GraphFactory>();
         }
     }
 }

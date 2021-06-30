@@ -1,4 +1,5 @@
 ﻿using LuccaDevises.Domain;
+using LuccaDevises.Domain.Input;
 using LuccaDevises.Services.Parser;
 using System;
 using System.IO;
@@ -23,7 +24,7 @@ namespace LuccaDevises.Services.Factory
                                     .Split(new[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
                                     .ToList();
 
-                return contentParser.Parse(inputFile); ;
+                return contentParser.Parse(inputFile);
             }
             else
             {

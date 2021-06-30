@@ -1,17 +1,14 @@
 ﻿using LuccaDevises.Services.Extensions;
 using LuccaDevises.Services.Factory;
-using LuccaDevises.Services.Parser;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.IO;
-using System.Linq;
 
 namespace LuccaDevises
 {
     internal class Program
     {
         private static readonly ServiceProvider serviceProvider = new ServiceCollection()
-                                                                    .AddLuccaDevicesServices()
+                                                                    .AddLuccaDevisesServices()
                                                                     .BuildServiceProvider();
 
         private static void Main(string[] args)
@@ -23,9 +20,9 @@ namespace LuccaDevises
                 return;
             }
 
-            string filePath = args[0];
             try
             {
+                string filePath = args[0];
                 var inputState = serviceProvider.GetService<LuccaContentFactory>().Create(filePath);
             }
             catch (Exception ex)

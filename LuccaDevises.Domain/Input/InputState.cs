@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LuccaDevises.Domain
+namespace LuccaDevises.Domain.Input
 {
     public class InputState
     {

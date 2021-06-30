@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LuccaDevises.Domain
+namespace LuccaDevises.Domain.Input
 {
     public class TransformationGoal
     {
