@@ -29,10 +29,10 @@ namespace LuccaDevises
                 var dijstraAlgorithm = serviceProvider.GetService<DijstraAlgorithm>();
 
                 var inputState = luccaContentFactory.Create(filePath);
-                var graph = graphFactory.Create(inputState.ExchangeRates);
+                var undirectedGraph = graphFactory.Create(inputState.ExchangeRates);
                 var startVertex = graphFactory.CreateVertex(inputState.TransformationGoal.InitialCurrency);
                 var endVertex = graphFactory.CreateVertex(inputState.TransformationGoal.TargetCurrency);
-                dijstraAlgorithm.CalculateShortestPath(graph, startVertex, endVertex);
+                dijstraAlgorithm.CalculateShortestPath(undirectedGraph, startVertex, endVertex);
             }
             catch (Exception ex)
             {
