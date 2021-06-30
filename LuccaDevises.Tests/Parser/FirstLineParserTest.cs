@@ -13,10 +13,9 @@ namespace LuccaDevises.Tests.Parser
             var emptyLine = "";
 
             //When
-            var contentIsValid = firstLineParser.IsValid(emptyLine);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => firstLineParser.Parse(emptyLine));
         }
 
         [Fact]
@@ -26,7 +25,7 @@ namespace LuccaDevises.Tests.Parser
             var lineWithThreeElement = "EUR;550;JPY";
 
             //When
-            var contentIsValid = firstLineParser.IsValid(lineWithThreeElement);
+            var contentIsValid = firstLineParser.Parse(lineWithThreeElement);
 
             //Then
             Assert.True(contentIsValid);
@@ -39,10 +38,9 @@ namespace LuccaDevises.Tests.Parser
             var lineWithoutThreeElement = "EUR;550;JPY;4";
 
             //When
-            var contentIsValid = firstLineParser.IsValid(lineWithoutThreeElement);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => firstLineParser.Parse(lineWithoutThreeElement));
         }
 
         [Fact]
@@ -54,7 +52,7 @@ namespace LuccaDevises.Tests.Parser
             //When
 
             //Then
-            Assert.Throws<ArgumentException>(() => firstLineParser.IsValid(lineWithThreeElementUnordered));
+            Assert.Throws<ArgumentException>(() => firstLineParser.Parse(lineWithThreeElementUnordered));
         }
     }
 }

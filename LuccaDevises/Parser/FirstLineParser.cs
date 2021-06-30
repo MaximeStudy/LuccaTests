@@ -1,4 +1,6 @@
-﻿namespace LuccaDevises.Parser
+﻿using System;
+
+namespace LuccaDevises.Parser
 {
     public class FirstLineParser
     {
@@ -11,12 +13,12 @@
             this.positiveIntegerParser = positiveIntegerParser;
         }
 
-        public bool IsValid(string line)
+        public bool Parse(string line)
         {
             var splitLine = line.Split(';');
             if (splitLine.Length != 3)
             {
-                return false;
+                throw new ArgumentException($"{line} does not have three part separated by semi-column ';' !");
             }
 
             var currencyOne = currencyParser.Parse(splitLine[0]);

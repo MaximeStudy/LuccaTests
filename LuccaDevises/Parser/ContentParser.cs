@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LuccaDevises.Parser
 {
@@ -15,32 +16,26 @@ namespace LuccaDevises.Parser
             this.nthLineParser = nthLineParser;
         }
 
-        public bool IsValid(List<string> fileContent)
+        public bool Parse(List<string> fileContent)
         {
             if (fileContent.Count <= 2)
             {
-                return false;
+                throw new ArgumentException($"File does not have more than 3 parts!");
             }
 
+            var firstLine = firstLineParser.Parse(fileContent[0]);
             var numberOfExchangeRate = secondLineParser.Parse(fileContent[1]);
-            if (firstLineParser.IsValid(fileContent[0]))
+
+            if (fileContent.Count != numberOfExchangeRate + 2)
             {
-                if (fileContent.Count != numberOfExchangeRate + 2)
-                {
-                    return false;
-                }
-                for (int i = 2; i < fileContent.Count; i++)
-                {
-                    if (!nthLineParser.IsValid(fileContent[i]))
-                    {
-                        return false;
-                    }
-                }
+                throw new ArgumentException($"Number of exchange rate does not match with real total of exchange number!");
             }
-            else
+
+            for (int i = 2; i < fileContent.Count; i++)
             {
-                return false;
+                var nthLine = nthLineParser.Parse(fileContent[i]);
             }
+
             return true;
         }
     }

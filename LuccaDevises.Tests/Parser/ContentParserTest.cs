@@ -14,10 +14,9 @@ namespace LuccaDevises.Tests.Parser
             List<string> fileContent = new List<string>();
 
             //When
-            var contentIsValid = contentParser.IsValid(fileContent);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => contentParser.Parse(fileContent));
         }
 
         [Fact]
@@ -30,10 +29,10 @@ namespace LuccaDevises.Tests.Parser
             fileContent.Add("AUD;CHF;0.9661");
 
             //When
-            var contentIsValid = contentParser.IsValid(fileContent);
+            var parsedValue = contentParser.Parse(fileContent);
 
             //Then
-            Assert.True(contentIsValid);
+            Assert.True(parsedValue);
         }
 
         [Fact]
@@ -47,10 +46,10 @@ namespace LuccaDevises.Tests.Parser
             fileContent.Add("JPY;CHF;0.9661");
 
             //When
-            var contentIsValid = contentParser.IsValid(fileContent);
+            var parsedValue = contentParser.Parse(fileContent);
 
             //Then
-            Assert.True(contentIsValid);
+            Assert.True(parsedValue);
         }
 
         [Fact]
@@ -64,10 +63,9 @@ namespace LuccaDevises.Tests.Parser
             fileContent.Add("AUD;CFG;0.9661");
 
             //When
-            var contentIsValid = contentParser.IsValid(fileContent);
 
             //Then
-            Assert.False(contentIsValid);
+            Assert.Throws<ArgumentException>(() => contentParser.Parse(fileContent));
         }
 
         [Fact]
@@ -85,7 +83,7 @@ namespace LuccaDevises.Tests.Parser
             //When
 
             //Then
-            Assert.Throws<ArgumentException>(() => contentParser.IsValid(fileContent));
+            Assert.Throws<ArgumentException>(() => contentParser.Parse(fileContent));
         }
     }
 }
