@@ -14,7 +14,7 @@ namespace LuccaDevises
                                                                     .BuildServiceProvider();
 
         private static int Main(string[] args)
-        
+
         {
             if (args.Length != 1)
             {
@@ -36,7 +36,7 @@ namespace LuccaDevises
                 var startVertex = undirectedGraphFactory.CreateVertex(inputState.TransformationGoal.InitialCurrency);
                 var endVertex = undirectedGraphFactory.CreateVertex(inputState.TransformationGoal.TargetCurrency);
                 var shortestPathResult = dijstraAlgorithm.CalculateShortestPath(undirectedGraph, startVertex, endVertex);
-                var result = currencyConverter.ConvertCurrency(inputState, shortestPathResult.VerticesOrder);
+                var result = currencyConverter.ConvertCurrency(inputState.TransformationGoal.InitialAmount, inputState.ExchangeRates, shortestPathResult.VerticesOrder);
                 return result;
             }
             catch (Exception ex)
