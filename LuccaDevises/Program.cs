@@ -26,14 +26,14 @@ namespace LuccaDevises
             {
                 string filePath = args[0];
                 var luccaContentFactory = serviceProvider.GetService<LuccaContentFactory>();
-                var graphFactory = serviceProvider.GetService<GraphFactory>();
+                var undirectedGraphFactory = serviceProvider.GetService<UndirectedGraphFactory>();
                 var dijstraAlgorithm = serviceProvider.GetService<DijstraAlgorithm>();
                 var currencyConverter = serviceProvider.GetService<CurrencyConverter>();
 
                 var inputState = luccaContentFactory.Create(filePath);
-                var undirectedGraph = graphFactory.Create(inputState.ExchangeRates);
-                var startVertex = graphFactory.CreateVertex(inputState.TransformationGoal.InitialCurrency);
-                var endVertex = graphFactory.CreateVertex(inputState.TransformationGoal.TargetCurrency);
+                var undirectedGraph = undirectedGraphFactory.Create(inputState.ExchangeRates);
+                var startVertex = undirectedGraphFactory.CreateVertex(inputState.TransformationGoal.InitialCurrency);
+                var endVertex = undirectedGraphFactory.CreateVertex(inputState.TransformationGoal.TargetCurrency);
                 var shortestPathResult = dijstraAlgorithm.CalculateShortestPath(undirectedGraph, startVertex, endVertex);
                 var result = currencyConverter.ConvertCurrency(inputState, shortestPathResult.VerticesOrder);
                 return result;

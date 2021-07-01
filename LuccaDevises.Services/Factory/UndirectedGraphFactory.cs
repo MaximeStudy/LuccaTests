@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace LuccaDevises.Services.Factory
 {
-    public class GraphFactory
+    public class UndirectedGraphFactory
     {
         public UndirectedGraph Create(List<ExchangeRate> exchangeRates)
         {

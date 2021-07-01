@@ -18,7 +18,7 @@ namespace LuccaDevises.Services.Extensions
                                     .AddSingleton<NthLineParser, NthLineParser>()
                                     .AddSingleton<ContentParser, ContentParser>()
                                     .AddSingleton<LuccaContentFactory, LuccaContentFactory>()
-                                    .AddSingleton<GraphFactory, GraphFactory>()
+                                    .AddSingleton<UndirectedGraphFactory, UndirectedGraphFactory>()
                                     .AddSingleton<DijstraAlgorithm, DijstraAlgorithm>()
                                     .AddSingleton<CurrencyConverter, CurrencyConverter>();
         }
