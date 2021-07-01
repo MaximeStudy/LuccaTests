@@ -20,10 +20,10 @@ namespace LuccaDevises.Services.RouteFinder
             try
             {
                 //https://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra
-                Dictionary<Vertex, int> distancePerVertex = new Dictionary<Vertex, int>();
-                Dictionary<Vertex, bool> unusedVertex = new Dictionary<Vertex, bool>();
-                Dictionary<Vertex, Dictionary<Vertex, Edge>> neighbors = new Dictionary<Vertex, Dictionary<Vertex, Edge>>();
-                Dictionary<Vertex, Vertex> predecessor = new Dictionary<Vertex, Vertex>();
+                Dictionary<Vertex, int> distancePerVertex = new();
+                Dictionary<Vertex, bool> unusedVertex = new();
+                Dictionary<Vertex, Dictionary<Vertex, Edge>> neighbors = new();
+                Dictionary<Vertex, Vertex> predecessor = new();
 
                 DictionaryInitialization(graph, distancePerVertex, unusedVertex, neighbors);
                 if (!distancePerVertex.ContainsKey(startingVertex))
@@ -56,7 +56,7 @@ namespace LuccaDevises.Services.RouteFinder
                     }
                 }
 
-                ShortestPathResult shortestPathResult = new ShortestPathResult
+                ShortestPathResult shortestPathResult = new()
                 {
                     Distance = distancePerVertex[endingVertex],
                     VerticesOrder = GetVertexResultPath(startingVertex, endingVertex, predecessor)
@@ -102,7 +102,7 @@ namespace LuccaDevises.Services.RouteFinder
 
         private static Dictionary<Vertex, Edge> GetNeighbors(Vertex currentVertex, List<Edge> edges)
         {
-            Dictionary<Vertex, Edge> neighbors = new Dictionary<Vertex, Edge>();
+            Dictionary<Vertex, Edge> neighbors = new();
             foreach (var edge in edges)
             {
                 if (edge.VertexOne.Equals(currentVertex))
@@ -133,7 +133,7 @@ namespace LuccaDevises.Services.RouteFinder
             }
         }
 
-        private Vertex ChoseMinimalDistanceVertex(Dictionary<Vertex, int> distancePerVertex, Dictionary<Vertex, bool> unusedVertex)
+        private static Vertex ChoseMinimalDistanceVertex(Dictionary<Vertex, int> distancePerVertex, Dictionary<Vertex, bool> unusedVertex)
         {
             var minDistance = int.MaxValue;
             Vertex vertex = null;

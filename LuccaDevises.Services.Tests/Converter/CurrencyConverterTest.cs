@@ -21,9 +21,9 @@ namespace LuccaDevises.Services.Tests.Converter
         public void GivenExchangeRateAndOrder_WhenConvertCurrency_ThenMultiplyInitialAmountWithRate()
         {
             //Given
-            CurrencyConverter currencyConverter = new CurrencyConverter();
+            CurrencyConverter currencyConverter = new();
 
-            List<ExchangeRate> exchangeRates = new List<ExchangeRate>();
+            List<ExchangeRate> exchangeRates = new();
 
             AddExchangeRate(exchangeRates, "AUD", "CHF", 0.9661M);
             AddExchangeRate(exchangeRates, "JPY", "KWU", 13.1151M);
@@ -51,9 +51,9 @@ namespace LuccaDevises.Services.Tests.Converter
         public void GivenExchangeRateAndOrder_WhenExchangeRateAreInversed_ThenMultiplyInitialAmountWithInversedRate()
         {
             //Given
-            CurrencyConverter currencyConverter = new CurrencyConverter();
+            CurrencyConverter currencyConverter = new();
 
-            List<ExchangeRate> exchangeRates = new List<ExchangeRate>();
+            List<ExchangeRate> exchangeRates = new();
 
             AddExchangeRate(exchangeRates, "AUD", "CHF", 0.9661M);
             AddExchangeRate(exchangeRates, "JPY", "KWU", 13.1151M);
@@ -81,9 +81,9 @@ namespace LuccaDevises.Services.Tests.Converter
         public void GivenExerciseInput_WhenConvertCurrency_ThenCheckResult()
         {
             //Given
-            CurrencyConverter currencyConverter = new CurrencyConverter();
+            CurrencyConverter currencyConverter = new();
 
-            List<ExchangeRate> exchangeRates = new List<ExchangeRate>();
+            List<ExchangeRate> exchangeRates = new();
 
             AddExchangeRate(exchangeRates, "AUD", "CHF", 0.9661M);
             AddExchangeRate(exchangeRates, "JPY", "KWU", 13.1151M);
