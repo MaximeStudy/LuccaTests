@@ -15,7 +15,6 @@ namespace LuccaDevises.Services.Converter
             while (orderStack.Count > 0)
             {
                 var nextCurrency = orderStack.Pop();
-                Console.Write($"{currentCurrency} {nextCurrency}");
 
                 var exchangeRate = exchangeRates
                                 .FirstOrDefault(er => (er.StartCurrency == currentCurrency.Name && er.EndCurrency == nextCurrency.Name) || (er.StartCurrency == nextCurrency.Name && er.EndCurrency == currentCurrency.Name));

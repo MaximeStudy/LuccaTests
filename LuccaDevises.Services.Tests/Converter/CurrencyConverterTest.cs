@@ -38,7 +38,7 @@ namespace LuccaDevises.Services.Tests.Converter
             order.Push(undirectedGraphFactory.CreateVertex("CHF"));
             order.Push(undirectedGraphFactory.CreateVertex("AUD"));
 
-            var expectedResult = Math.Round(initialAmount * exchangeRates[0].Rate);
+            var expectedResult = Math.Round(initialAmount * exchangeRates[0].Rate, 0);
 
             //When
             var result = currencyConverter.ConvertCurrency(initialAmount, exchangeRates, order);
@@ -68,7 +68,7 @@ namespace LuccaDevises.Services.Tests.Converter
             order.Push(undirectedGraphFactory.CreateVertex("AUD"));
             order.Push(undirectedGraphFactory.CreateVertex("CHF"));
 
-            var expectedResult = Math.Round(initialAmount * Math.Round((1 / exchangeRates[0].Rate), 4));
+            var expectedResult = Math.Round(initialAmount * Math.Round((1 / exchangeRates[0].Rate), 4), 0);
 
             //When
             var result = currencyConverter.ConvertCurrency(initialAmount, exchangeRates, order);

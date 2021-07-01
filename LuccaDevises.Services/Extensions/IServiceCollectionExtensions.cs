@@ -1,4 +1,5 @@
 ﻿using LuccaDevises.Services.Converter;
+using LuccaDevises.Services.Facade;
 using LuccaDevises.Services.Factory;
 using LuccaDevises.Services.Parser;
 using LuccaDevises.Services.RouteFinder;
@@ -9,7 +10,7 @@ namespace LuccaDevises.Services.Extensions
 {
     public static class IServiceCollectionExtensions
     {
-        public static IServiceCollection AddLuccaDevisesServices(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddLuccaCurrencyServices(this IServiceCollection serviceCollection)
         {
             return serviceCollection.AddSingleton<IFileWrapper, FileWrapper>()
                                     .AddSingleton<CurrencyParser, CurrencyParser>()
@@ -22,7 +23,8 @@ namespace LuccaDevises.Services.Extensions
                                     .AddSingleton<LuccaContentFactory, LuccaContentFactory>()
                                     .AddSingleton<UndirectedGraphFactory, UndirectedGraphFactory>()
                                     .AddSingleton<DijstraAlgorithm, DijstraAlgorithm>()
-                                    .AddSingleton<CurrencyConverter, CurrencyConverter>();
+                                    .AddSingleton<CurrencyConverter, CurrencyConverter>()
+                                    .AddSingleton<CurrencyFacade, CurrencyFacade>();
         }
     }
 }
