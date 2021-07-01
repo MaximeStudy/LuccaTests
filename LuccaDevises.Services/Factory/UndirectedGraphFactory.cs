@@ -1,5 +1,6 @@
 ﻿using LuccaDevises.Domain.Graph;
 using LuccaDevises.Domain.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,6 +30,11 @@ namespace LuccaDevises.Services.Factory
 
         public Edge CreateEdge(ExchangeRate exchangeRate)
         {
+            if (exchangeRate.StartCurrency == exchangeRate.EndCurrency)
+            {
+                throw new ArgumentException($"Start currency {exchangeRate.StartCurrency} cannot be the same as end currency {exchangeRate.EndCurrency}!");
+            }
+
             var vertexOne = new Vertex(exchangeRate.StartCurrency);
             var vertexTwo = new Vertex(exchangeRate.EndCurrency);
 

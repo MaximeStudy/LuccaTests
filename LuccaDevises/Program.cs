@@ -14,6 +14,7 @@ namespace LuccaDevises
                                                                     .BuildServiceProvider();
 
         private static int Main(string[] args)
+        
         {
             if (args.Length != 1)
             {
