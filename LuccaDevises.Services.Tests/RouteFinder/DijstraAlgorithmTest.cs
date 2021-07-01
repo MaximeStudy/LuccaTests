@@ -186,5 +186,85 @@ namespace LuccaDevises.Services.Tests.RouteFinder
             //Then
             Assert.Throws<ArgumentException>(() => dijstraAlgorithm.CalculateShortestPath(undirectedGraph, startVertex, endVertex));
         }
+
+        [Fact]
+        public void GivenAUndirectedGraphWithWeight_WhenCalculateShortestPath_ThenVerifyDistance()
+        {
+            //Given
+            var dijstraAlgorithm = new DijstraAlgorithm();
+            List<Vertex> vertices = new List<Vertex>();
+            List<Edge> edges = new List<Edge>();
+
+            var undirectedGraph = CreateComplexUndirectedGraphWithWeight(vertices, edges);
+
+            var expectedDistance = 6;
+
+            var startingVertex = undirectedGraphFactory.CreateVertex("A");
+            var endingVertex = undirectedGraphFactory.CreateVertex("G");
+
+            //When
+            var result = dijstraAlgorithm.CalculateShortestPath(undirectedGraph, startingVertex, endingVertex);
+
+            //Then
+            Assert.Equal(expectedDistance, result.Distance);
+        }
+
+        [Fact]
+        public void GivenAUndirectedGraphWithWeight_WhenCalculateShortestPath_ThenVerifyVerticesOrder()
+        {
+            //Given
+            var dijstraAlgorithm = new DijstraAlgorithm();
+            List<Vertex> vertices = new List<Vertex>();
+            List<Edge> edges = new List<Edge>();
+
+            var undirectedGraph = CreateComplexUndirectedGraphWithWeight(vertices, edges);
+
+            var startingVertex = undirectedGraphFactory.CreateVertex("A");
+            var endingVertex = undirectedGraphFactory.CreateVertex("G");
+
+            var expectedResult = new Stack<Vertex>();
+            expectedResult.Push(undirectedGraphFactory.CreateVertex("G"));
+            expectedResult.Push(undirectedGraphFactory.CreateVertex("D"));
+            expectedResult.Push(undirectedGraphFactory.CreateVertex("B"));
+            expectedResult.Push(undirectedGraphFactory.CreateVertex("A"));
+
+            //When
+            var result = dijstraAlgorithm.CalculateShortestPath(undirectedGraph, startingVertex, endingVertex);
+
+            //Then
+            Assert.Equal(expectedResult, result.VerticesOrder);
+        }
+
+        private UndirectedGraph CreateComplexUndirectedGraphWithWeight(List<Vertex> vertices, List<Edge> edges)
+        {
+            var A = "A";
+            var B = "B";
+            var C = "C";
+            var D = "D";
+            var E = "E";
+            var F = "F";
+            var G = "G";
+            vertices.Add(undirectedGraphFactory.CreateVertex(A));
+            vertices.Add(undirectedGraphFactory.CreateVertex(B));
+            vertices.Add(undirectedGraphFactory.CreateVertex(C));
+            vertices.Add(undirectedGraphFactory.CreateVertex(D));
+            vertices.Add(undirectedGraphFactory.CreateVertex(E));
+            vertices.Add(undirectedGraphFactory.CreateVertex(F));
+            vertices.Add(undirectedGraphFactory.CreateVertex(G));
+
+            edges.Add(undirectedGraphFactory.CreateEdge(A, B, 1));
+            edges.Add(undirectedGraphFactory.CreateEdge(A, C, 2));
+            edges.Add(undirectedGraphFactory.CreateEdge(B, D, 2));
+            edges.Add(undirectedGraphFactory.CreateEdge(C, D, 3));
+            edges.Add(undirectedGraphFactory.CreateEdge(B, F, 3));
+            edges.Add(undirectedGraphFactory.CreateEdge(C, E, 4));
+            edges.Add(undirectedGraphFactory.CreateEdge(D, F, 3));
+            edges.Add(undirectedGraphFactory.CreateEdge(D, E, 2));
+            edges.Add(undirectedGraphFactory.CreateEdge(D, G, 3));
+            edges.Add(undirectedGraphFactory.CreateEdge(E, G, 5));
+            edges.Add(undirectedGraphFactory.CreateEdge(F, G, 4));
+
+            return undirectedGraphFactory.CreateUndirectedGraph(vertices, edges);
+        }
     }
 }
