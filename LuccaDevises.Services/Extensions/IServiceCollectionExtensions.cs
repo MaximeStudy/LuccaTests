@@ -5,7 +5,6 @@ using LuccaDevises.Services.Parser;
 using LuccaDevises.Services.RouteFinder;
 using LuccaDevises.Services.Wrapper;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace LuccaDevises.Services.Extensions
 {
@@ -13,10 +12,7 @@ namespace LuccaDevises.Services.Extensions
     {
         public static IServiceCollection AddLuccaCurrencyServices(this IServiceCollection serviceCollection)
         {
-            ILoggerFactory loggerFactory = new LoggerFactory();
-            var logger = loggerFactory.CreateLogger("ILoggerForAll");
-            return serviceCollection.AddLogging()
-                                    .AddSingleton<IFileWrapper, FileWrapper>()
+            return serviceCollection.AddSingleton<IFileWrapper, FileWrapper>()
                                     .AddSingleton<CurrencyParser, CurrencyParser>()
                                     .AddSingleton<PositiveIntegerParser, PositiveIntegerParser>()
                                     .AddSingleton<ExchangeRateParser, ExchangeRateParser>()
@@ -28,8 +24,7 @@ namespace LuccaDevises.Services.Extensions
                                     .AddSingleton<UndirectedGraphFactory, UndirectedGraphFactory>()
                                     .AddSingleton<DijstraAlgorithm, DijstraAlgorithm>()
                                     .AddSingleton<CurrencyConverter, CurrencyConverter>()
-                                    .AddSingleton<CurrencyFacade, CurrencyFacade>()
-                                    .AddSingleton(typeof(ILogger), logger); ;
+                                    .AddSingleton<CurrencyFacade, CurrencyFacade>();
         }
     }
 }
