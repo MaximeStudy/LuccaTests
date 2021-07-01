@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace LuccaDevises.Services.Parser
 {
-    public class ContentParser
+    public class ContentParser : IContentParser
     {
         public readonly FirstLineParser FirstLineParser;
         public readonly SecondLineParser SecondLineParser;

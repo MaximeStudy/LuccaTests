@@ -18,7 +18,7 @@ namespace LuccaDevises.Services.Extensions
                                     .AddSingleton<FirstLineParser, FirstLineParser>()
                                     .AddSingleton<SecondLineParser, SecondLineParser>()
                                     .AddSingleton<NthLineParser, NthLineParser>()
-                                    .AddSingleton<ContentParser, ContentParser>()
+                                    .AddSingleton<IContentParser, ContentParser>()
                                     .AddSingleton<LuccaContentFactory, LuccaContentFactory>()
                                     .AddSingleton<UndirectedGraphFactory, UndirectedGraphFactory>()
                                     .AddSingleton<DijstraAlgorithm, DijstraAlgorithm>()

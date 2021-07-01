@@ -50,7 +50,7 @@ namespace LuccaDevises.Services.RouteFinder
                 PrintResult(shortestPathResult);
                 return shortestPathResult;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine("Error in Dijstra!");
                 throw;

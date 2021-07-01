@@ -9,10 +9,10 @@ namespace LuccaDevises.Services.Factory
 {
     public class LuccaContentFactory
     {
-        private readonly ContentParser contentParser;
+        private readonly IContentParser contentParser;
         private readonly IFileWrapper fileWrapper;
 
-        public LuccaContentFactory(ContentParser contentParser, IFileWrapper fileWrapper)
+        public LuccaContentFactory(IContentParser contentParser, IFileWrapper fileWrapper)
         {
             this.contentParser = contentParser;
             this.fileWrapper = fileWrapper;
