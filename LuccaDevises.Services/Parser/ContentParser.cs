@@ -1,5 +1,4 @@
-﻿using LuccaDevises.Domain;
-using LuccaDevises.Domain.Input;
+﻿using LuccaDevises.Domain.Input;
 using System;
 using System.Collections.Generic;
 
@@ -7,18 +6,14 @@ namespace LuccaDevises.Services.Parser
 {
     public class ContentParser : IContentParser
     {
-        public readonly FirstLineParser FirstLineParser;
-        public readonly SecondLineParser SecondLineParser;
-        public readonly NthLineParser nthLineParser;
-
-        protected ContentParser()
-        {
-        }
+        private readonly FirstLineParser firstLineParser;
+        private readonly SecondLineParser secondLineParser;
+        private readonly NthLineParser nthLineParser;
 
         public ContentParser(FirstLineParser firstLineParser, SecondLineParser secondLineParser, NthLineParser nthLineParser)
         {
-            this.FirstLineParser = firstLineParser;
-            this.SecondLineParser = secondLineParser;
+            this.firstLineParser = firstLineParser;
+            this.secondLineParser = secondLineParser;
             this.nthLineParser = nthLineParser;
         }
 
@@ -29,14 +24,15 @@ namespace LuccaDevises.Services.Parser
                 throw new ArgumentException($"File does not have more than 3 parts!");
             }
 
-            var transformationGoal = FirstLineParser.Parse(fileContent[0]);
-            var numberOfExchangeRate = SecondLineParser.Parse(fileContent[1]);
+            var transformationGoal = firstLineParser.Parse(fileContent[0]);
+            var numberOfExchangeRate = secondLineParser.Parse(fileContent[1]);
 
             var inputState = new InputState
             {
                 TransformationGoal = transformationGoal,
                 ExchangeRates = new List<ExchangeRate>()
             };
+
             if (fileContent.Count != numberOfExchangeRate + 2)
             {
                 throw new ArgumentException($"Number of exchange rate {numberOfExchangeRate} does not match with real total of exchange number {fileContent.Count - 2}!");

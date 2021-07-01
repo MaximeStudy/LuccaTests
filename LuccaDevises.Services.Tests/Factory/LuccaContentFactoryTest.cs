@@ -24,13 +24,62 @@ namespace LuccaDevises.Services.Tests.Factory
         }
 
         [Fact]
+        public void GivenAFile_WhenCreateInputState_ThenVerifyIfFileExists()
+        {
+            InputState expectedInputFile = new InputState();
+            var aFilePath = "a path";
+            var emptyFile = "";
+            mockFileWrapper.Setup(fw => fw.Exists(It.IsAny<string>())).Returns(true);
+            mockFileWrapper.Setup(fw => fw.ReadAllText(It.IsAny<string>())).Returns(emptyFile);
+            mockContentParser.Setup(cp => cp.Parse(It.IsAny<List<string>>())).Returns(expectedInputFile);
+
+            //When
+            luccaContentFactory.Create(aFilePath);
+
+            //Then
+            mockFileWrapper.Verify(fw => fw.Exists(aFilePath));
+        }
+
+        [Fact]
+        public void GivenANonExistingFile_WhenCreateInputState_ThenRaiseError()
+        {
+            InputState expectedInputFile = new InputState();
+            var aFilePath = "a path";
+            var emptyFile = "";
+            mockFileWrapper.Setup(fw => fw.Exists(It.IsAny<string>())).Returns(false);
+            mockFileWrapper.Setup(fw => fw.ReadAllText(It.IsAny<string>())).Returns(emptyFile);
+            mockContentParser.Setup(cp => cp.Parse(It.IsAny<List<string>>())).Returns(expectedInputFile);
+
+            //When
+
+            //Then
+            Assert.Throws<ArgumentException>(() => luccaContentFactory.Create(aFilePath));
+        }
+
+        [Fact]
+        public void GivenAFile_WhenCreateInputState_ThenRetrieveFileContent()
+        {
+            InputState expectedInputFile = new InputState();
+            var aFilePath = "a path";
+            var emptyFile = "";
+            mockFileWrapper.Setup(fw => fw.Exists(It.IsAny<string>())).Returns(true);
+            mockFileWrapper.Setup(fw => fw.ReadAllText(It.IsAny<string>())).Returns(emptyFile);
+            mockContentParser.Setup(cp => cp.Parse(It.IsAny<List<string>>())).Returns(expectedInputFile);
+
+            //When
+            luccaContentFactory.Create(aFilePath);
+
+            //Then
+            mockFileWrapper.Verify(fw => fw.ReadAllText(aFilePath));
+        }
+
+        [Fact]
         public void GivenAnInExistingFile_WhenCreateValidInputState_ThenParseIsCalled()
         {
             //Given
             InputState expectedInputFile = new InputState();
             var anInexistingPath = "a path";
             var emptyFile = "";
-            var emptyList = new List<string>();
             mockFileWrapper.Setup(fw => fw.Exists(It.IsAny<string>())).Returns(true);
             mockFileWrapper.Setup(fw => fw.ReadAllText(It.IsAny<string>())).Returns(emptyFile);
             mockContentParser.Setup(cp => cp.Parse(It.IsAny<List<string>>())).Returns(expectedInputFile);
@@ -41,22 +90,5 @@ namespace LuccaDevises.Services.Tests.Factory
             //Then
             mockContentParser.Verify(v => v.Parse(It.IsAny<List<string>>()));
         }
-
-        //[Fact]
-        //public void GivenAnExistingFile_WhenCreateValidInputState_ThenParseFile()
-        //{
-        //    //Given
-        //    InputState expectedInputFile = new InputState();
-        //    var mockContentParser = new Mock<ContentParserForTest>();
-        //    //mockContentParser.Setup(cp => cp.Parse(It.IsAny<List<string>>())).Returns(expectedInputFile);
-
-        //    var contentFactory = new LuccaContentFactory(mockContentParser.Object, mockFileWrapper.Object);
-
-        //    //When
-        //    var res = luccaContentFactory.Create("");
-        //    //Then
-
-        //    Assert.NotNull(res);
-        //}
     }
 }
