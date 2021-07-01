@@ -1,4 +1,5 @@
-﻿using LuccaDevises.Domain.Input;
+﻿using LuccaDevises.Domain.Graph;
+using LuccaDevises.Domain.Input;
 using LuccaDevises.Services.Factory;
 using System;
 using System.Collections.Generic;
@@ -209,6 +210,60 @@ namespace LuccaDevises.Services.Tests.Factory
 
             //Then
             Assert.Equal(exchangeRates.Count, undirectedGraph.Edges.Count);
+        }
+
+        [Fact]
+        public void GivenVerticesAndEdges_WhenCreateUndirectedGraph_ThenVerticesAreSet()
+        {
+            //Given
+            var vertexA = "A";
+            var vertexB = "B";
+            int aWeight = 5;
+
+            List<Vertex> vertices = new List<Vertex>();
+            List<Edge> edges = new List<Edge>();
+            var vertexOne = undirectedGraphFactory.CreateVertex(vertexA);
+            var vertexTwo = undirectedGraphFactory.CreateVertex(vertexB);
+            vertices.Add(vertexOne);
+            vertices.Add(vertexTwo);
+
+            var edge = undirectedGraphFactory.CreateEdge(vertexA, vertexB, aWeight);
+            edges.Add(edge);
+
+            var expectedNbVertex = 2;
+
+            //When
+            var undirectedGraph = undirectedGraphFactory.CreateUndirectedGraph(vertices, edges);
+
+            //Then
+            Assert.Equal(expectedNbVertex, undirectedGraph.Vertices.Count);
+        }
+
+        [Fact]
+        public void GivenVerticesAndEdges_WhenCreateUndirectedGraph_ThenEdgesAreSet()
+        {
+            //Given
+            var vertexA = "A";
+            var vertexB = "B";
+            int aWeight = 5;
+
+            List<Vertex> vertices = new List<Vertex>();
+            List<Edge> edges = new List<Edge>();
+            var vertexOne = undirectedGraphFactory.CreateVertex(vertexA);
+            var vertexTwo = undirectedGraphFactory.CreateVertex(vertexB);
+            vertices.Add(vertexOne);
+            vertices.Add(vertexTwo);
+
+            var edge = undirectedGraphFactory.CreateEdge(vertexA, vertexB, aWeight);
+            edges.Add(edge);
+
+            var expectedNbEdge = 1;
+
+            //When
+            var undirectedGraph = undirectedGraphFactory.CreateUndirectedGraph(vertices, edges);
+
+            //Then
+            Assert.Equal(expectedNbEdge, undirectedGraph.Edges.Count);
         }
     }
 }
