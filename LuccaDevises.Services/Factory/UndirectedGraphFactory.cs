@@ -8,7 +8,7 @@ namespace LuccaDevises.Services.Factory
 {
     public class UndirectedGraphFactory
     {
-        public UndirectedGraph Create(List<ExchangeRate> exchangeRates)
+        public UndirectedGraph CreateUndirectedGraph(List<ExchangeRate> exchangeRates)
         {
             var vertices = exchangeRates
                                      .SelectMany(ip => new[] { ip.StartCurrency, ip.EndCurrency })

@@ -7,14 +7,18 @@ namespace LuccaDevises.Services.Parser
 {
     public class ContentParser
     {
-        private readonly FirstLineParser firstLineParser;
-        private readonly SecondLineParser secondLineParser;
-        private readonly NthLineParser nthLineParser;
+        public readonly FirstLineParser FirstLineParser;
+        public readonly SecondLineParser SecondLineParser;
+        public readonly NthLineParser nthLineParser;
+
+        protected ContentParser()
+        {
+        }
 
         public ContentParser(FirstLineParser firstLineParser, SecondLineParser secondLineParser, NthLineParser nthLineParser)
         {
-            this.firstLineParser = firstLineParser;
-            this.secondLineParser = secondLineParser;
+            this.FirstLineParser = firstLineParser;
+            this.SecondLineParser = secondLineParser;
             this.nthLineParser = nthLineParser;
         }
 
@@ -25,8 +29,8 @@ namespace LuccaDevises.Services.Parser
                 throw new ArgumentException($"File does not have more than 3 parts!");
             }
 
-            var transformationGoal = firstLineParser.Parse(fileContent[0]);
-            var numberOfExchangeRate = secondLineParser.Parse(fileContent[1]);
+            var transformationGoal = FirstLineParser.Parse(fileContent[0]);
+            var numberOfExchangeRate = SecondLineParser.Parse(fileContent[1]);
 
             var inputState = new InputState
             {

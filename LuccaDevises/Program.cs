@@ -32,7 +32,7 @@ namespace LuccaDevises
                 var currencyConverter = serviceProvider.GetService<CurrencyConverter>();
 
                 var inputState = luccaContentFactory.Create(filePath);
-                var undirectedGraph = undirectedGraphFactory.Create(inputState.ExchangeRates);
+                var undirectedGraph = undirectedGraphFactory.CreateUndirectedGraph(inputState.ExchangeRates);
                 var startVertex = undirectedGraphFactory.CreateVertex(inputState.TransformationGoal.InitialCurrency);
                 var endVertex = undirectedGraphFactory.CreateVertex(inputState.TransformationGoal.TargetCurrency);
                 var shortestPathResult = dijstraAlgorithm.CalculateShortestPath(undirectedGraph, startVertex, endVertex);

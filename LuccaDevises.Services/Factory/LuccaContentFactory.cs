@@ -1,5 +1,4 @@
-﻿using LuccaDevises.Domain;
-using LuccaDevises.Domain.Input;
+﻿using LuccaDevises.Domain.Input;
 using LuccaDevises.Services.Parser;
 using System;
 using System.IO;

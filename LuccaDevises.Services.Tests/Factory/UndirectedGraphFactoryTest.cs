@@ -111,6 +111,53 @@ namespace LuccaDevises.Services.Tests.Factory
             Assert.Throws<ArgumentException>(() => undirectedGraphFactory.CreateEdge(exchangeRate));
         }
 
+        [Fact]
+        public void GivenAnExchangeRateList_WhenCreateUndirectedGraph_ThenVertexAreTheSameNumberAsNumberOfCurrency()
+        {
+            //Given
+            List<ExchangeRate> exchangeRates = new List<ExchangeRate>();
+
+            AddExchangeRate(exchangeRates, "A", "B", 1);
+            AddExchangeRate(exchangeRates, "A", "C", 1);
+            AddExchangeRate(exchangeRates, "C", "D", 1);
+            AddExchangeRate(exchangeRates, "D", "E", 1);
+            AddExchangeRate(exchangeRates, "D", "F", 1);
+            AddExchangeRate(exchangeRates, "A", "E", 1);
+            AddExchangeRate(exchangeRates, "D", "A", 1);
+
+            int nbDifferentCurrency = 6;
+
+            //When
+            var undirectedGraph = undirectedGraphFactory.CreateUndirectedGraph(exchangeRates);
+
+            //Then
+            Assert.Equal(nbDifferentCurrency, undirectedGraph.Vertices.Count);
+        }
+
+        [Fact]
+        public void GivenAnExchangeRateList_WhenCreateUndirectedGraph_ThenEdgesAreTheSameNumberAsNumberOfExchangeRate()
+        {
+            //Given
+            List<ExchangeRate> exchangeRates = new List<ExchangeRate>();
+
+            AddExchangeRate(exchangeRates, "A", "B", 1);
+            AddExchangeRate(exchangeRates, "A", "C", 1);
+            AddExchangeRate(exchangeRates, "C", "D", 1);
+            AddExchangeRate(exchangeRates, "D", "E", 1);
+            AddExchangeRate(exchangeRates, "D", "F", 1);
+            AddExchangeRate(exchangeRates, "A", "E", 1);
+            AddExchangeRate(exchangeRates, "D", "A", 1);
+
+            //When
+            var undirectedGraph = undirectedGraphFactory.CreateUndirectedGraph(exchangeRates);
+
+            //Then
+            Assert.Equal(exchangeRates.Count, undirectedGraph.Edges.Count);
+        }
+
+        //TODO check uniformity of exchange rate list (doublon)
+        //TODO check exchange list is a closed graph
+
         private void AddExchangeRate(List<ExchangeRate> exchangeRates, string startCurrency, string endCurrency, decimal rate)
         {
             ExchangeRate exchangeRate = new ExchangeRate
