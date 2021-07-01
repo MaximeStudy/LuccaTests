@@ -13,6 +13,10 @@ namespace LuccaDevises.Services.RouteFinder
             //TODO check that startingVertex and endingVertex are in graph
             //Verify O((A+N)logn) O(a+nlogn)
             //TODO Check positive weight for dijstra
+            if (startingVertex == endingVertex)
+            {
+                throw new ArgumentException($"starting vertex {startingVertex} and ending vertex {endingVertex} cannot be the same");
+            }
             try
             {
                 //https://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra
@@ -21,7 +25,17 @@ namespace LuccaDevises.Services.RouteFinder
                 Dictionary<Vertex, Dictionary<Vertex, Edge>> neighbors = new Dictionary<Vertex, Dictionary<Vertex, Edge>>();
                 Dictionary<Vertex, Vertex> predecessor = new Dictionary<Vertex, Vertex>();
 
-                Initialization(graph, startingVertex, distancePerVertex, unusedVertex, neighbors);
+                DictionaryInitialization(graph, distancePerVertex, unusedVertex, neighbors);
+                if (!distancePerVertex.ContainsKey(startingVertex))
+                {
+                    throw new ArgumentException($"starting vertex {startingVertex} does not exist in graph");
+                }
+                if (!distancePerVertex.ContainsKey(endingVertex))
+                {
+                    throw new ArgumentException($"ending vertex {endingVertex} does not exist in graph");
+                }
+
+                distancePerVertex[startingVertex] = 0;
 
                 while (unusedVertex.Count != 0)
                 {
@@ -109,7 +123,7 @@ namespace LuccaDevises.Services.RouteFinder
             return neighbors;
         }
 
-        private static void Initialization(UndirectedGraph graph, Vertex startingVertex, Dictionary<Vertex, int> distancePerVertex, Dictionary<Vertex, bool> unusedVertex, Dictionary<Vertex, Dictionary<Vertex, Edge>> neighbors)
+        private static void DictionaryInitialization(UndirectedGraph graph, Dictionary<Vertex, int> distancePerVertex, Dictionary<Vertex, bool> unusedVertex, Dictionary<Vertex, Dictionary<Vertex, Edge>> neighbors)
         {
             foreach (var vertex in graph.Vertices)
             {
@@ -117,7 +131,6 @@ namespace LuccaDevises.Services.RouteFinder
                 unusedVertex[vertex] = true;
                 neighbors[vertex] = GetNeighbors(vertex, graph.Edges);
             }
-            distancePerVertex[startingVertex] = 0;
         }
 
         private Vertex ChoseMinimalDistanceVertex(Dictionary<Vertex, int> distancePerVertex, Dictionary<Vertex, bool> unusedVertex)

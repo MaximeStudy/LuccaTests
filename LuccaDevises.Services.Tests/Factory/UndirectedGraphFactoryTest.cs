@@ -6,7 +6,7 @@ using Xunit;
 
 namespace LuccaDevises.Services.Tests.Factory
 {
-    public class UndirectedGraphFactoryTest
+    public class UndirectedGraphFactoryTest : TestBase
     {
         private readonly UndirectedGraphFactory undirectedGraphFactory;
 
@@ -14,6 +14,9 @@ namespace LuccaDevises.Services.Tests.Factory
         {
             undirectedGraphFactory = new UndirectedGraphFactory();
         }
+
+        //TODO check uniformity of exchange rate list (doublon)
+        //TODO check exchange list is a closed graph
 
         [Fact]
         public void GivenAExchangeRate_WhenCreateVertex_ThenVertexContainsName()
@@ -29,42 +32,28 @@ namespace LuccaDevises.Services.Tests.Factory
         }
 
         [Fact]
-        public void GivenAnExchangeRate_WhenCreateEdgeFromExchangeRate_ThenVertexOneIsStartCurrency()
+        public void WhenCreateEdge_ThenVertexOneIsStartCurrency()
         {
             //Given
             var startCurrency = "A";
             var endCurrency = "B";
 
-            ExchangeRate exchangeRate = new ExchangeRate
-            {
-                StartCurrency = startCurrency,
-                EndCurrency = endCurrency,
-                Rate = 1
-            };
-
             //When
-            var edge = undirectedGraphFactory.CreateEdge(exchangeRate);
+            var edge = undirectedGraphFactory.CreateEdge(startCurrency, endCurrency);
 
             //Then
             Assert.Equal(startCurrency, edge.VertexOne.Name);
         }
 
         [Fact]
-        public void GivenAnExchangeRate_WhenCreateEdgeFromExchangeRate_ThenVertexTwoIsEndCurrency()
+        public void WhenCreateEdge_ThenVertexTwoIsEndCurrency()
         {
             //Given
             var startCurrency = "A";
             var endCurrency = "B";
 
-            ExchangeRate exchangeRate = new ExchangeRate
-            {
-                StartCurrency = startCurrency,
-                EndCurrency = endCurrency,
-                Rate = 1
-            };
-
             //When
-            var edge = undirectedGraphFactory.CreateEdge(exchangeRate);
+            var edge = undirectedGraphFactory.CreateEdge(startCurrency, endCurrency);
 
             //Then
             Assert.Equal(endCurrency, edge.VertexTwo.Name);
@@ -93,22 +82,89 @@ namespace LuccaDevises.Services.Tests.Factory
         }
 
         [Fact]
-        public void GivenAnExchangeRate_WhenCreateEdgeWithSameCurrency_ThenEdgeIsNotValid()
+        public void GivenAnExchangeRate_WhenCreateEdgeFromExchangeRate_ThenVertexOneIsStartCurrency()
         {
             //Given
             var startCurrency = "A";
+            var endCurrency = "B";
 
             ExchangeRate exchangeRate = new ExchangeRate
             {
                 StartCurrency = startCurrency,
-                EndCurrency = startCurrency,
+                EndCurrency = endCurrency,
                 Rate = 5
             };
 
             //When
+            var edge = undirectedGraphFactory.CreateEdge(exchangeRate);
 
             //Then
-            Assert.Throws<ArgumentException>(() => undirectedGraphFactory.CreateEdge(exchangeRate));
+            Assert.Equal(startCurrency, edge.VertexOne.Name);
+        }
+
+        [Fact]
+        public void GivenAnExchangeRate_WhenCreateEdgeFromExchangeRate_ThenVertexTwoIsEndCurrency()
+        {
+            //Given
+            var startCurrency = "A";
+            var endCurrency = "B";
+
+            ExchangeRate exchangeRate = new ExchangeRate
+            {
+                StartCurrency = startCurrency,
+                EndCurrency = endCurrency,
+                Rate = 5
+            };
+
+            //When
+            var edge = undirectedGraphFactory.CreateEdge(exchangeRate);
+
+            //Then
+            Assert.Equal(endCurrency, edge.VertexTwo.Name);
+        }
+
+        [Fact]
+        public void GivenStartAndEndCurrencyString_WhenCreateEdge_ThenVertexWeightIsByDefaultOne()
+        {
+            //Given
+            var startCurrency = "A";
+            var endCurrency = "B";
+
+            int defaultWeight = 1;
+
+            //When
+            var edge = undirectedGraphFactory.CreateEdge(startCurrency, endCurrency);
+
+            //Then
+            Assert.Equal(defaultWeight, edge.Weight);
+        }
+
+        [Fact]
+        public void GivenStartAndEndCurrencyStringWithWeight_WhenCreateEdge_ThenVertexWeightIsSet()
+        {
+            //Given
+            var startCurrency = "A";
+            var endCurrency = "B";
+
+            int aWeight = 5;
+
+            //When
+            var edge = undirectedGraphFactory.CreateEdge(startCurrency, endCurrency, aWeight);
+
+            //Then
+            Assert.Equal(aWeight, edge.Weight);
+        }
+
+        [Fact]
+        public void GivenStartAndEndCurrencyString_WhenCreateEdgeWithSameCurrency_ThenEdgeIsNotValid()
+        {
+            //Given
+            var startCurrency = "A";
+
+            //When
+
+            //Then
+            Assert.Throws<ArgumentException>(() => undirectedGraphFactory.CreateEdge(startCurrency, startCurrency));
         }
 
         [Fact]
@@ -153,20 +209,6 @@ namespace LuccaDevises.Services.Tests.Factory
 
             //Then
             Assert.Equal(exchangeRates.Count, undirectedGraph.Edges.Count);
-        }
-
-        //TODO check uniformity of exchange rate list (doublon)
-        //TODO check exchange list is a closed graph
-
-        private void AddExchangeRate(List<ExchangeRate> exchangeRates, string startCurrency, string endCurrency, decimal rate)
-        {
-            ExchangeRate exchangeRate = new ExchangeRate
-            {
-                StartCurrency = startCurrency,
-                EndCurrency = endCurrency,
-                Rate = rate
-            };
-            exchangeRates.Add(exchangeRate);
         }
     }
 }

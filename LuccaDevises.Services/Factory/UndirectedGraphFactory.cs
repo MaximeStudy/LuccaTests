@@ -30,15 +30,20 @@ namespace LuccaDevises.Services.Factory
 
         public Edge CreateEdge(ExchangeRate exchangeRate)
         {
-            if (exchangeRate.StartCurrency == exchangeRate.EndCurrency)
+            return CreateEdge(exchangeRate.StartCurrency, exchangeRate.EndCurrency);
+        }
+
+        public Edge CreateEdge(string startCurrency, string endCurrency, int weight = 1)
+        {
+            if (startCurrency == endCurrency)
             {
-                throw new ArgumentException($"Start currency {exchangeRate.StartCurrency} cannot be the same as end currency {exchangeRate.EndCurrency}!");
+                throw new ArgumentException($"Start currency {startCurrency} cannot be the same as end currency {endCurrency}!");
             }
 
-            var vertexOne = new Vertex(exchangeRate.StartCurrency);
-            var vertexTwo = new Vertex(exchangeRate.EndCurrency);
+            var vertexOne = new Vertex(startCurrency);
+            var vertexTwo = new Vertex(endCurrency);
 
-            var edge = new Edge(vertexOne, vertexTwo);
+            var edge = new Edge(vertexOne, vertexTwo, weight);
 
             return edge;
         }
