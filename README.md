@@ -41,4 +41,45 @@ Si plusieurs chemins de conversion vous permettent d'atteindre la devise cible, 
 
 ## Entrée du programme
 
-Le programme doit pouvoir être exécuté avec la ligne de commande suivante :
+Le programme **doit pouvoir** être exécuté avec la ligne de commande suivante :
+
+ `LuccaDevises <chemin vers le fichier>`
+ 
+ Ce fichier est structuré de la manière suivante :
+ 
+ La **première ligne** contient :
+- La devise initiale D1 dans laquelle le montant est affiché, sous la forme d'un code de 3 caractères
+- Le montant M dans cette devise initiale, sous la forme d'un nombre entier positif > 0
+- La devise cible D2 vers laquelle il veut convertir le montant, sous la forme d'un code de 3 caractères
+- Les informations vous sont transmises au format D1;M;D2
+
+La **deuxième ligne** contient un nombre entier N indiquant le nombre de taux de change qui vont vous être transmis.
+
+S'en suit **N lignes** représentant les taux de change représentés ainsi :
+- La devise de départ DD sous la forme d'un code de 3 caractères
+- La devise d'arrivée DA sous la forme d'un code de 3 caractères
+- Le taux de change T sous la forme d'un nombre à 4 décimales (avec un "." comme séparateur décimal)
+- Les informations vous sont transmises au format DD;DA;T
+
+## Sortie du programme
+
+Votre programme doit retourner le montant converti dans la devise cible arrondi à un nombre entier.
+
+## Exemple
+
+**Entrée**
+
+ ```
+ EUR;550;JPY
+ 6
+ AUD;CHF;0.9661
+ JPY;KRW;13.1151
+ EUR;CHF;1.2053
+ AUD;JPY;86.0305
+ EUR;USD;1.2989
+ JPY;INR;0.6571
+ ```
+ 
+**Sortie**
+
+ `59033`
