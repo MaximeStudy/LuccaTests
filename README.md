@@ -83,3 +83,7 @@ Votre programme doit retourner le montant converti dans la devise cible arrondi 
 **Sortie**
 
  `59033`
+
+## Additionel 
+
+La sortie est  `-1` quand une exception se produit dans l'application.
