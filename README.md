@@ -90,5 +90,5 @@ La sortie est  `-1` quand une exception se produit dans l'application.
 
 ## Améliorations à réalier
 
-Ajout du logging.
-Meilleure gestion des codes d'erreur.
+- Ajout du logging
+- Meilleure gestion des codes d'erreur
