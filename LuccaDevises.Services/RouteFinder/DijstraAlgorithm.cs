@@ -9,7 +9,6 @@ namespace LuccaDevises.Services.RouteFinder
     {
         public ShortestPathResult CalculateShortestPath(UndirectedGraph graph, Vertex startingVertex, Vertex endingVertex)
         {
-            //TODO Unit test
             //TODO check that startingVertex and endingVertex are in graph
             //Verify O((A+N)logn) O(a+nlogn)
             //TODO Check positive weight for dijstra
@@ -39,10 +38,11 @@ namespace LuccaDevises.Services.RouteFinder
 
                 while (unusedVertex.Count != 0)
                 {
-                    var currentVertex = ChoseMinimalDistanceVertex(distancePerVertex, unusedVertex);
+                    var currentVertex = ChoseMinimalDistanceVertex(distancePerVertex, unusedVertex); //complexity of algorithm is here
                     unusedVertex.Remove(currentVertex);
                     foreach (var neighbor in neighbors[currentVertex])
                     {
+                        //Update distances and predecessor
                         var neighborVertex = neighbor.Key;
                         if (unusedVertex.ContainsKey(neighborVertex))
                         {
@@ -135,6 +135,7 @@ namespace LuccaDevises.Services.RouteFinder
 
         private static Vertex ChoseMinimalDistanceVertex(Dictionary<Vertex, int> distancePerVertex, Dictionary<Vertex, bool> unusedVertex)
         {
+            //can be improved by using priority queue
             var minDistance = int.MaxValue;
             Vertex vertex = null;
             foreach (var currentVertex in distancePerVertex.Keys)

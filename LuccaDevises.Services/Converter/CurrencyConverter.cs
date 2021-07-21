@@ -17,7 +17,8 @@ namespace LuccaDevises.Services.Converter
                 var nextCurrency = orderStack.Pop();
 
                 var exchangeRate = exchangeRates
-                                .FirstOrDefault(er => (er.StartCurrency == currentCurrency.Name && er.EndCurrency == nextCurrency.Name) || (er.StartCurrency == nextCurrency.Name && er.EndCurrency == currentCurrency.Name));
+                                .FirstOrDefault(er => (er.StartCurrency == currentCurrency.Name && er.EndCurrency == nextCurrency.Name) ||
+                                                      (er.StartCurrency == nextCurrency.Name && er.EndCurrency == currentCurrency.Name));
 
                 decimal rate;
                 if (exchangeRate.StartCurrency == currentCurrency.Name)
