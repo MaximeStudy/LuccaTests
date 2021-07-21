@@ -9,9 +9,6 @@ namespace LuccaDevises.Services.RouteFinder
     {
         public ShortestPathResult CalculateShortestPath(UndirectedGraph graph, Vertex startingVertex, Vertex endingVertex)
         {
-            //TODO check that startingVertex and endingVertex are in graph
-            //Verify O((A+N)logn) O(a+nlogn)
-            //TODO Check positive weight for dijstra
             if (startingVertex == endingVertex)
             {
                 throw new ArgumentException($"starting vertex {startingVertex} and ending vertex {endingVertex} cannot be the same");
